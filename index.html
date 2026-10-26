@@ -357,28 +357,42 @@
 
 <script>
   (function () {
-    var items = document.querySelectorAll(".rec, .job");
+    var groups = [document.querySelectorAll("#trabajo .rec"), document.querySelectorAll("#trayectoria .job")];
     var links = document.querySelectorAll("nav.links a");
-    if (!("IntersectionObserver" in window)) {
-      document.documentElement.classList.remove("js");
-      return;
-    }
-    // Franja central del viewport: el hito que la cruza recibe el foco.
-    var focusObs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { e.target.classList.toggle("is-focus", e.isIntersecting); });
-    }, { rootMargin: "-42% 0px -42% 0px" });
-    items.forEach(function (el) { focusObs.observe(el); });
-
-    var navObs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        links.forEach(function (a) { a.classList.toggle("on", a.getAttribute("href") === "#" + e.target.id); });
-      });
-    }, { rootMargin: "-45% 0px -50% 0px" });
+    var sections = [];
     links.forEach(function (a) {
       var sec = document.querySelector(a.getAttribute("href"));
-      if (sec) navObs.observe(sec);
+      if (sec) sections.push([a, sec]);
     });
+    var ticking = false;
+
+    // En cada grupo, el hito cuyo centro queda más cerca del centro del viewport recibe el foco.
+    function update() {
+      ticking = false;
+      var vh = window.innerHeight, mid = vh / 2;
+      groups.forEach(function (items) {
+        var best = null, bestDist = Infinity;
+        items.forEach(function (el) {
+          var r = el.getBoundingClientRect();
+          if (r.bottom <= 0 || r.top >= vh) return;
+          var d = Math.abs(r.top + r.height / 2 - mid);
+          if (d < bestDist) { bestDist = d; best = el; }
+        });
+        items.forEach(function (el) { el.classList.toggle("is-focus", el === best); });
+      });
+      var current = null;
+      sections.forEach(function (pair) {
+        var r = pair[1].getBoundingClientRect();
+        if (r.top <= mid && r.bottom > mid) current = pair[0];
+      });
+      links.forEach(function (a) { a.classList.toggle("on", a === current); });
+    }
+    function onScroll() {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    update();
   })();
 </script>
 
