@@ -20,7 +20,7 @@ Landing estática de un solo archivo (`index.html`). Esta guía fija las reglas 
 | `--espatula` | `#e0526a` | **Rosa espátula** (plumas rosa-rojo); junto a `--red` cierra la gama cálida |
 | `--greca` | SVG en data URI | Friso xicalcoliuhqui |
 
-**Paleta inspirada en el penacho de plumas de Moctezuma** (los colores recorren todo el diseño; el dibujo del penacho solo aparece como corona de sección): verde quetzal, azul cotinga, oro y rosa espátula, siempre en este orden cuando se reparten por elementos (línea de la cabecera, etiquetas del Enfoque, borde de cada chip del Stack). El rojo grana sigue siendo el acento dominante.
+**Paleta inspirada en el penacho de plumas de Moctezuma** (los colores recorren todo el diseño; el dibujo del penacho solo aparece tras la sección Trabajo): verde quetzal, azul cotinga, oro y rosa espátula, siempre en este orden cuando se reparten por elementos (línea de la cabecera, etiquetas del Enfoque, borde de cada chip del Stack). El rojo grana sigue siendo el acento dominante.
 
 Regla: rojo manda; verde, azul, oro y rosa aparecen en pequeñas dosis (líneas, bordes, puntos, brillos de fondo ≤ 10 %), nunca como bloques planos.
 
@@ -31,7 +31,7 @@ Regla: rojo manda; verde, azul, oro y rosa aparecen en pequeñas dosis (líneas,
 ## Motivos mexicas
 | Motivo | Dónde | Reglas |
 |---|---|---|
-| **Corona de sección (penacho)** | Antes de Trabajo, Trayectoria y Contacto (`.corona`) | Abanico estilizado de plumas de quetzal, hilera azul de cotinga, hilera rosa de espátula y diadema de oro; ilustración propia en SVG (plantilla `#penacho-tpl`). Al llegar a la sección se "posa" sobre la línea: baja unos 38 px, se despliega fila por fila y queda en opacidad .5 con saturación .7. Una sola vez; sin JS no aparece y con movimiento reducido aparece sin animar |
+| **Penacho tras "Trabajo"** | Solo antes de la primera sección (`.corona`) | Abanico estilizado de plumas de quetzal, hilera azul de cotinga, hilera rosa de espátula y diadema de oro; ilustración propia en SVG (plantilla `#penacho-tpl`). Está *detrás* de la sección (la sección y la greca tienen fondo opaco): sube desde ahí y se abre fila por fila según el scroll (`--p`, `--u1..3`, `--b`), reversible. Ya abierto, se mece ±1.3° (8 s) y su brillo oscila ±7° (9 s). Opacidad máx. .54, saturación .7. Con movimiento reducido o sin scroll queda abierto y quieto; sin JS no aparece |
 | **Piedra del sol** (anillos, 20 signos del tonalpohualli, 8 rayos) | Fondo del hero (`.sol`) | Opacidad ≈ .1, gira 1 vuelta cada 6 min, `aria-hidden` |
 | **Línea iridiscente** | Borde inferior de la cabecera | Degradado quetzal → cotinga → oro → espátula, 1 px, opacidad .45 |
 | **Greca xicalcoliuhqui** | Frisos `.greca` entre secciones | Opacidad .5, desvanecida en los bordes |
@@ -43,7 +43,7 @@ Regla: rojo manda; verde, azul, oro y rosa aparecen en pequeñas dosis (líneas,
 ## Movimiento
 - **Foco al hacer scroll:** el hito más cercano al centro (proyectos y trayectoria) se ilumina; el resto se atenúa.
 - **Stack:** etiquetas que flotan, rebotan y huyen del cursor; solo corren con la sección visible.
-- **Corona de penacho** que se posa sobre cada sección nueva (Trabajo, Trayectoria, Contacto).
+- **Penacho ligado al scroll**: emerge de detrás de "Trabajo", se abre y luego se mece.
 - Giro lento de la piedra del sol.
 - Todo se desactiva con `prefers-reduced-motion` y sin JavaScript la página queda completa y estática.
 
