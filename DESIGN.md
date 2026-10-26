@@ -58,6 +58,6 @@ ES/EN con selector. Idioma inicial: elección guardada → `?lang=` → idioma d
 
 ## Contenido y credibilidad
 - **Posicionamiento:** Full-Stack equilibrado (API + interfaz). No usar "backend-leaning" en titulares, meta ni README.
-- **Verificabilidad:** cada proyecto lleva una etiqueta `.badge`: **Código público** (con enlace) o **Código privado** (trabajo para clientes, sin enlace). Una leyenda bajo el título de "Trabajo seleccionado" explica la diferencia. Si un proyecto nuevo es público, enlazarlo; si es privado, no inventar evidencia.
+- **Verificabilidad:** cada proyecto lleva una etiqueta `.badge`: **Código público** (con enlace) o **Código privado** (proyectos de empresa, p. ej. Clean & Shiny; sin enlace). Una leyenda bajo el título de "Trabajo seleccionado" explica la diferencia. Si un proyecto nuevo es público, enlazarlo; si es privado, no inventar evidencia.
 - **Enfoque:** 6 tarjetas (Arquitectura, APIs & Datos, Interfaces, Seguridad, IA & LLMs, Calidad), en rejilla de 3 columnas (2 en tablet, 1 en móvil). Acentos de color en orden quetzal → cotinga → oro → espátula → quetzal → cotinga.
 - **Pendiente:** capturas de pantalla de los casos de estudio (solo si no exponen datos de clientes) y el enlace de LinkedIn.
