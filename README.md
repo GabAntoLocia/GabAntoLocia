@@ -2,7 +2,7 @@
 
 **Full-Stack Engineer** · Remoto · México
 
-+4 años construyendo producto de punta a punta: **APIs y servicios en Node.js, TypeScript y Python, e interfaces en React y Next.js**. Clean Architecture, arquitectura hexagonal y DDD. PostgreSQL · AWS · integración de LLMs (RAG, LangChain).
++4 años construyendo producto de punta a punta: **APIs y servicios en Node.js, TypeScript y Python, e interfaces en React y Next.js**. Clean Architecture, arquitectura hexagonal y DDD. PostgreSQL · AWS · integración de LLMs (RAG, LangChain). Desarrollo **spec-driven** y manejo eficiente de **agentes de IA**.
 
 🌐 **Portafolio:** https://gabantolocia.github.io · ✉️ locciaa1@gmail.com
 
