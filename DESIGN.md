@@ -55,3 +55,9 @@ ES/EN con selector. Idioma inicial: elección guardada → `?lang=` → idioma d
 1. Texto nuevo: ponle `data-i18n="tN"` (siguiente número libre) y agrega su `"tN"` en `EN`.
 2. Mantén el contraste (texto principal `--ink`, secundario `--muted`).
 3. Si agregas ornamento mexica, respeta las reglas de arriba: sutil, oscuro, sin color pleno.
+
+## Contenido y credibilidad
+- **Posicionamiento:** Full-Stack equilibrado (API + interfaz). No usar "backend-leaning" en titulares, meta ni README.
+- **Verificabilidad:** cada proyecto lleva una etiqueta `.badge`: **Código público** (con enlace) o **Código privado** (trabajo para clientes, sin enlace). Una leyenda bajo el título de "Trabajo seleccionado" explica la diferencia. Si un proyecto nuevo es público, enlazarlo; si es privado, no inventar evidencia.
+- **Enfoque:** 6 tarjetas (Arquitectura, APIs & Datos, Interfaces, Seguridad, IA & LLMs, Calidad), en rejilla de 3 columnas (2 en tablet, 1 en móvil). Acentos de color en orden quetzal → cotinga → oro → espátula → quetzal → cotinga.
+- **Pendiente:** capturas de pantalla de los casos de estudio (solo si no exponen datos de clientes) y el enlace de LinkedIn.

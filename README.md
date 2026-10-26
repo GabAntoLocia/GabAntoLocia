@@ -1,8 +1,8 @@
 # Gabriel Antaño Locia
 
-**Full-Stack Engineer (backend-leaning)** · Remoto · México
+**Full-Stack Engineer** · Remoto · México
 
-+4 años construyendo backend con **Node.js, TypeScript y Python**. Clean Architecture, arquitectura hexagonal y DDD. PostgreSQL · AWS · integración de LLMs (RAG, LangChain).
++4 años construyendo producto de punta a punta: **APIs y servicios en Node.js, TypeScript y Python, e interfaces en React y Next.js**. Clean Architecture, arquitectura hexagonal y DDD. PostgreSQL · AWS · integración de LLMs (RAG, LangChain).
 
 🌐 **Portafolio:** https://gabantolocia.github.io · ✉️ locciaa1@gmail.com
 

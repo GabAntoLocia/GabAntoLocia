@@ -30,10 +30,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#09090b">
 <title>Gabriel Antaño Locia — Full-Stack Engineer</title>
-<meta name="description" content="Portafolio de Gabriel Antaño Locia: Full-Stack Engineer backend-leaning. Node.js, TypeScript y Python; Clean Architecture, hexagonal y DDD; PostgreSQL, AWS y LLMs.">
+<meta name="description" content="Portafolio de Gabriel Antaño Locia: Full-Stack Engineer. APIs en Node.js, TypeScript y Python e interfaces en React y Next.js; Clean Architecture, hexagonal y DDD; PostgreSQL, AWS y LLMs.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Gabriel Antaño Locia — Full-Stack Engineer">
-<meta property="og:description" content="Software que aguanta producción. Node.js · TypeScript · Python · Clean Architecture · PostgreSQL · AWS · LLMs.">
+<meta property="og:description" content="Software que aguanta producción, de la API a la interfaz. Node.js · TypeScript · Python · React · Next.js · Clean Architecture · PostgreSQL · AWS · LLMs.">
 <meta property="og:url" content="https://gabantolocia.github.io/">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2309090b'/%3E%3Cpath d='M16 26L3.8 19.8' stroke='%231f9d6b' stroke-width='2.6' stroke-linecap='round'/%3E%3Cpath d='M16 26L6.0 14.4' stroke='%233fe0b4' stroke-width='2.6' stroke-linecap='round'/%3E%3Cpath d='M16 26L9.5 10.4' stroke='%232a9fc9' stroke-width='2.6' stroke-linecap='round'/%3E%3Cpath d='M16 26L13.7 8.3' stroke='%23e0b04e' stroke-width='2.6' stroke-linecap='round'/%3E%3Cpath d='M16 26L18.3 8.3' stroke='%23e0526a' stroke-width='2.6' stroke-linecap='round'/%3E%3Cpath d='M16 26L22.5 10.4' stroke='%232a9fc9' stroke-width='2.6' stroke-linecap='round'/%3E%3Cpath d='M16 26L26.0 14.4' stroke='%233fe0b4' stroke-width='2.6' stroke-linecap='round'/%3E%3Cpath d='M16 26L28.2 19.8' stroke='%231f9d6b' stroke-width='2.6' stroke-linecap='round'/%3E%3Cpath d='M9 27.5h14' stroke='%23e0b04e' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
@@ -152,6 +152,11 @@
   .rec .go a:hover{color:var(--red-ink)}
   .rec .go a.live{color:var(--ink);border-bottom:1px solid var(--red)}
   .rec .go a.live:hover{color:var(--red-ink);border-color:var(--red-ink)}
+  .badge{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--chrome);border:1px solid var(--line);padding:6px 9px;white-space:nowrap}
+  .badge i{width:6px;height:6px;border-radius:50%;background:var(--quetzal-glint)}
+  .badge.priv i{background:var(--oro)}
+  .legend{margin:14px 0 4px;max-width:72ch;color:var(--muted);font-size:14px}
+  .legend b{color:var(--ink);font-weight:600}
   .rec .go .case{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:6px 9px;white-space:nowrap;align-self:center}
   @media(max-width:760px){.rec{grid-template-columns:52px 1fr;gap:16px}.rec .num{font-size:30px}.rec .go{grid-column:2;flex-direction:row;align-items:center;justify-content:flex-start;gap:20px;text-align:left;margin-top:12px}}
 
@@ -169,17 +174,19 @@
   .job li b{color:var(--ink);font-weight:600}
   @media(max-width:700px){.job{grid-template-columns:1fr;gap:10px}.job .when{display:flex;gap:14px;align-items:baseline}.job .when b{margin-top:0}}
 
-  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);margin:32px 0 10px;border:1px solid var(--line)}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);margin:32px 0 10px;border:1px solid var(--line)}
   .cell{background:var(--bg-2);padding:26px 22px}
   .cell .k{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--red-ink)}
   .cell:nth-child(1) .k{color:var(--quetzal-glint)}
   .cell:nth-child(2) .k{color:var(--cotinga)}
   .cell:nth-child(3) .k{color:var(--oro)}
   .cell:nth-child(4) .k{color:var(--espatula)}
+  .cell:nth-child(5) .k{color:var(--quetzal-glint)}
+  .cell:nth-child(6) .k{color:var(--cotinga)}
   .cell h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:20px;letter-spacing:.02em;margin:12px 0 10px}
   .cell p{margin:0;color:var(--muted);font-size:14.5px}
-  @media(max-width:860px){.grid4{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:480px){.grid4{grid-template-columns:1fr}}
+  @media(max-width:860px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:480px){.grid{grid-template-columns:1fr}}
 
   .stack{padding-block:38px 6px}
   .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
@@ -265,9 +272,9 @@
     <div class="hero-art" aria-hidden="true"><div class="sol"><svg viewBox="-200 -200 400 400" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true" focusable="false"><circle r="193" stroke-dasharray="1.2 6.28"/><circle r="184"/><circle r="136"/><circle r="126" stroke-dasharray="3 5"/><rect x="150" y="-9" width="18" height="18" rx="3" transform="rotate(0)"/><circle cx="159" cy="0" r="2" fill="currentColor" stroke="none" transform="rotate(0)"/><rect x="150" y="-9" width="18" height="18" rx="3" transform="rotate(18)"/><circle cx="159" cy="0" r="2" fill="currentColor" stroke="none" transform="rotate(18)"/><rect x="150" y="-9" width="18" height="18" rx="3" transform="rotate(36)"/><circle cx="159" cy="0" r="2" fill="currentColor" stroke="none" transform="rotate(36)"/><rect x="150" y="-9" width="18" height="18" rx="3" transform="rotate(54)"/><circle cx="159" cy="0" r="2" fill="currentColor" stroke="none" transform="rotate(54)"/><rect x="150" y="-9" width="18" height="18" rx="3" transform="rotate(72)"/><circle cx="159" cy="0" r="2" fill="currentColor" stroke="none" transform="rotate(72)"/><rect x="150" y="-9" width="18" height="18" rx="3" transform="rotate(90)"/><circle cx="159" cy="0" r="2" fill="currentColor" stroke="none" transform="rotate(90)"/><rect x="150" y="-9" width="18" height="18" rx="3" transform="rotate(108)"/><circle cx="159" cy="0" r="2" fill="currentColor" stroke="none" transform="rotate(108)"/><rect x="150" y="-9" width="18" height="18" rx="3" transform="rotate(126)"/><circle cx="159" cy="0" r="2" fill="currentColor" stroke="none" transform="rotate(126)"/><rect x="150" y="-9" width="18" height="18" rx="3" transform="rotate(144)"/><circle cx="159" cy="0" r="2" fill="currentColor" stroke="none" transform="rotate(144)"/><rect x="150" y="-9" width="18" height="18" rx="3" transform="rotate(162)"/><circle cx="159" cy="0" r="2" fill="currentColor" stroke="none" transform="rotate(162)"/><rect x="150" y="-9" width="18" height="18" rx="3" transform="rotate(180)"/><circle cx="159" cy="0" r="2" fill="currentColor" stroke="none" transform="rotate(180)"/><rect x="150" y="-9" width="18" height="18" rx="3" transform="rotate(198)"/><circle cx="159" cy="0" r="2" fill="currentColor" stroke="none" transform="rotate(198)"/><rect x="150" y="-9" width="18" height="18" rx="3" transform="rotate(216)"/><circle cx="159" cy="0" r="2" fill="currentColor" stroke="none" transform="rotate(216)"/><rect x="150" y="-9" width="18" height="18" rx="3" transform="rotate(234)"/><circle cx="159" cy="0" r="2" fill="currentColor" stroke="none" transform="rotate(234)"/><rect x="150" y="-9" width="18" height="18" rx="3" transform="rotate(252)"/><circle cx="159" cy="0" r="2" fill="currentColor" stroke="none" transform="rotate(252)"/><rect x="150" y="-9" width="18" height="18" rx="3" transform="rotate(270)"/><circle cx="159" cy="0" r="2" fill="currentColor" stroke="none" transform="rotate(270)"/><rect x="150" y="-9" width="18" height="18" rx="3" transform="rotate(288)"/><circle cx="159" cy="0" r="2" fill="currentColor" stroke="none" transform="rotate(288)"/><rect x="150" y="-9" width="18" height="18" rx="3" transform="rotate(306)"/><circle cx="159" cy="0" r="2" fill="currentColor" stroke="none" transform="rotate(306)"/><rect x="150" y="-9" width="18" height="18" rx="3" transform="rotate(324)"/><circle cx="159" cy="0" r="2" fill="currentColor" stroke="none" transform="rotate(324)"/><rect x="150" y="-9" width="18" height="18" rx="3" transform="rotate(342)"/><circle cx="159" cy="0" r="2" fill="currentColor" stroke="none" transform="rotate(342)"/><path class="r" d="M62 -10L122 0L62 10Z" transform="rotate(0)"/><path class="r" d="M62 -10L122 0L62 10Z" transform="rotate(45)"/><path class="r" d="M62 -10L122 0L62 10Z" transform="rotate(90)"/><path class="r" d="M62 -10L122 0L62 10Z" transform="rotate(135)"/><path class="r" d="M62 -10L122 0L62 10Z" transform="rotate(180)"/><path class="r" d="M62 -10L122 0L62 10Z" transform="rotate(225)"/><path class="r" d="M62 -10L122 0L62 10Z" transform="rotate(270)"/><path class="r" d="M62 -10L122 0L62 10Z" transform="rotate(315)"/><path d="M66 -5L100 0L66 5Z" transform="rotate(22.5)"/><path d="M66 -5L100 0L66 5Z" transform="rotate(67.5)"/><path d="M66 -5L100 0L66 5Z" transform="rotate(112.5)"/><path d="M66 -5L100 0L66 5Z" transform="rotate(157.5)"/><path d="M66 -5L100 0L66 5Z" transform="rotate(202.5)"/><path d="M66 -5L100 0L66 5Z" transform="rotate(247.5)"/><path d="M66 -5L100 0L66 5Z" transform="rotate(292.5)"/><path d="M66 -5L100 0L66 5Z" transform="rotate(337.5)"/><circle r="54"/><circle r="42" stroke-dasharray="2 4"/><circle r="20"/><path class="r" d="M0 -10L10 0L0 10L-10 0Z"/></svg></div></div>
     <div class="wrap">
       <span class="status status-hero" data-i18n="t4"><span class="dot" aria-hidden="true"></span>Disponible · Remoto</span>
-      <span class="eyebrow">Gabriel Antaño Locia — Full-Stack Engineer (Backend-leaning)</span>
+      <span class="eyebrow">Gabriel Antaño Locia — Full-Stack Engineer</span>
       <h1 class="masthead" data-i18n="t5">Software<br>que <span class="red">aguanta</span><br>producción.</h1>
-      <p class="lede" data-i18n="t6">+4 años construyendo backend con <b>Node.js, TypeScript y Python.</b> Clean Architecture, arquitectura hexagonal y DDD. PostgreSQL · AWS · integración de LLMs (RAG, LangChain).</p>
+      <p class="lede" data-i18n="t6">+4 años construyendo producto de punta a punta: <b>APIs y servicios en Node.js, TypeScript y Python, e interfaces en React y Next.js.</b> Clean Architecture, hexagonal y DDD. PostgreSQL · AWS · integración de LLMs (RAG, LangChain).</p>
       <div class="cta-row">
         <a class="btn primary" href="#trabajo" data-i18n="t7">Ver proyectos</a>
         <a class="btn ghost" href="#contacto" data-i18n="t3">Contacto</a>
@@ -285,6 +292,7 @@
         <h2 data-i18n="t8">Trabajo seleccionado</h2>
         <span class="count" data-i18n="t9">05 · CÓDIGO + CASOS</span>
       </div>
+      <p class="legend" data-i18n="t69"><b>Código público:</b> puedes revisarlo en GitHub. <b>Código privado:</b> trabajo para clientes, por eso no tiene enlace.</p>
 
       <article class="rec">
         <div class="num">01<span class="dots" aria-hidden="true"><i></i></span></div>
@@ -295,7 +303,7 @@
           <p class="note" data-i18n="t11">Arquitectura hexagonal, webhook con firma HMAC (fail-closed + anti-replay), cola idempotente con lease y reintentos, y auth con magic link. 51 tests (Vitest), CI en GitHub Actions y Docker.</p>
           <div class="tags"><span class="tag">TypeScript</span><span class="tag">Node.js</span><span class="tag">Hexagonal</span><span class="tag">HMAC</span><span class="tag">Vitest</span><span class="tag">Docker</span></div>
         </div>
-        <div class="go"><a class="live" href="https://github.com/GabAntoLocia/backend-patterns-showcase" data-i18n="t12">Código →</a></div>
+        <div class="go"><span class="badge pub" data-i18n="t67"><i></i>Código público</span><a class="live" href="https://github.com/GabAntoLocia/backend-patterns-showcase" data-i18n="t12">Código →</a></div>
       </article>
 
       <article class="rec">
@@ -307,7 +315,7 @@
           <p class="note" data-i18n="t16">Respuesta inmediata + pipeline en background, colas durables e idempotencia con lease, cachés de geocoding, ~100 archivos de pruebas, Docker y GitHub Actions.</p>
           <div class="tags"><span class="tag">Node.js</span><span class="tag">TypeScript</span><span class="tag">Express</span><span class="tag">PostgreSQL</span><span class="tag">Docker</span></div>
         </div>
-        <div class="go"><span class="case" data-i18n="t17">Caso de estudio</span></div>
+        <div class="go"><span class="badge priv" data-i18n="t68"><i></i>Código privado</span></div>
       </article>
 
       <article class="rec">
@@ -319,7 +327,7 @@
           <p class="note" data-i18n="t21">Arquitectura hexagonal, webhook con firma HMAC (fail-closed), recordatorios por cron y auth de equipo con revalidación en vivo. +50 archivos de pruebas (Vitest).</p>
           <div class="tags"><span class="tag">Next.js 14</span><span class="tag">TypeScript</span><span class="tag">PostgreSQL</span><span class="tag">Hexagonal</span><span class="tag">Vitest</span></div>
         </div>
-        <div class="go"><span class="case" data-i18n="t17">Caso de estudio</span></div>
+        <div class="go"><span class="badge priv" data-i18n="t68"><i></i>Código privado</span></div>
       </article>
 
       <article class="rec">
@@ -331,7 +339,7 @@
           <p class="note" data-i18n="t25">Login sin contraseña (magic link) y acceso a datos aislado por cliente: el identificador sale siempre de la sesión — anti-IDOR, fail-closed.</p>
           <div class="tags"><span class="tag">Next.js 14</span><span class="tag">TypeScript</span><span class="tag">PostgreSQL</span><span class="tag">Tailwind</span><span class="tag">i18n</span></div>
         </div>
-        <div class="go"><span class="case" data-i18n="t17">Caso de estudio</span></div>
+        <div class="go"><span class="badge priv" data-i18n="t68"><i></i>Código privado</span></div>
       </article>
 
       <article class="rec">
@@ -343,7 +351,7 @@
           <p class="note" data-i18n="t28">Python / FastAPI, embeddings y vector search (Pinecone / OpenSearch). Proyecto de I+D que combina audio, ML e infraestructura de datos.</p>
           <div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Vector DB</span><span class="tag">RAG</span><span class="tag">ML</span></div>
         </div>
-        <div class="go"><span class="case" data-i18n="t17">Caso de estudio</span></div>
+        <div class="go"><span class="badge priv" data-i18n="t68"><i></i>Código privado</span></div>
       </article>
     </div>
   </section>
@@ -362,6 +370,7 @@
             <div class="org" data-i18n="t31">Remoto · Node.js · TypeScript · Next.js · PostgreSQL/Supabase</div>
             <ul>
               <li data-i18n="t32">Construí <b>tres sistemas en producción</b>: cotizador automático, portal de clientes y tablero de reclutamiento.</li>
+              <li data-i18n="t76">Interfaces en <b>Next.js 14</b> con Tailwind e i18n para el portal de clientes y el tablero kanban de reclutamiento.</li>
               <li data-i18n="t33">Colas durables, workers e <b>idempotencia</b>; cerca de 100 archivos de pruebas; despliegue con Docker y GitHub Actions.</li>
               <li data-i18n="t34"><b>Spec-driven development con Claude Code</b>: agentes especializados (producto, arquitectura, backend, frontend, QA, revisión) y una especificación por feature.</li>
             </ul>
@@ -401,11 +410,13 @@
         <h2 data-i18n="t43">Enfoque</h2>
         <span class="count" data-i18n="t44">CÓMO TRABAJO</span>
       </div>
-      <div class="grid4">
+      <div class="grid">
         <div class="cell"><div class="k" data-i18n="t45">01 · Arquitectura</div><h3 data-i18n="t46">Capas limpias</h3><p data-i18n="t47">Clean Architecture, hexagonal y DDD con criterio: dominio puro, casos de uso e infraestructura intercambiable. Sin sobre-ingeniería.</p></div>
         <div class="cell"><div class="k" data-i18n="t48">02 · APIs &amp; Datos</div><h3 data-i18n="t49">Predecible y rápido</h3><p data-i18n="t50">REST y GraphQL consistentes, validación estricta, Postgres con pooling, colas durables e idempotencia.</p></div>
-        <div class="cell"><div class="k" data-i18n="t51">03 · Seguridad</div><h3 data-i18n="t52">Por defecto</h3><p data-i18n="t53">Firma HMAC en webhooks, sesiones JWT, acceso server-side y aislamiento por usuario (fail-closed).</p></div>
-        <div class="cell"><div class="k" data-i18n="t54">04 · IA &amp; LLMs</div><h3 data-i18n="t55">Aplicada</h3><p data-i18n="t56">RAG, LangChain y OpenAI; spec-driven development con Claude Code y agentes especializados por rol.</p></div>
+        <div class="cell"><div class="k" data-i18n="t70">03 · Interfaces</div><h3 data-i18n="t71">Claras y conectadas</h3><p data-i18n="t72">Next.js y React con Tailwind e i18n: portales de autoservicio y tableros conectados a APIs propias, con el acceso a datos del lado del servidor.</p></div>
+        <div class="cell"><div class="k" data-i18n="t51">04 · Seguridad</div><h3 data-i18n="t52">Por defecto</h3><p data-i18n="t53">Firma HMAC en webhooks, sesiones JWT, acceso server-side y aislamiento por usuario (fail-closed).</p></div>
+        <div class="cell"><div class="k" data-i18n="t54">05 · IA &amp; LLMs</div><h3 data-i18n="t55">Aplicada</h3><p data-i18n="t56">RAG, LangChain y OpenAI; spec-driven development con Claude Code y agentes especializados por rol.</p></div>
+        <div class="cell"><div class="k" data-i18n="t73">06 · Calidad</div><h3 data-i18n="t74">Entrega con confianza</h3><p data-i18n="t75">Pruebas automatizadas (Vitest, Jest), CI en GitHub Actions y Docker: 51 pruebas en el showcase público y cerca de 100 archivos de pruebas en el cotizador.</p></div>
       </div>
     </div>
   </section>
@@ -466,7 +477,7 @@
       "t3": "Contact",
       "t4": "<span class=\"dot\" aria-hidden=\"true\"><\/span>Available · Remote",
       "t5": "Software<br>that <span class=\"red\">survives<\/span><br>production.",
-      "t6": "4+ years building backends with <b>Node.js, TypeScript and Python.<\/b> Clean Architecture, hexagonal architecture and DDD. PostgreSQL · AWS · LLM integration (RAG, LangChain).",
+      "t6": "4+ years building products end to end: <b>APIs and services in Node.js, TypeScript and Python, and interfaces in React and Next.js.<\/b> Clean Architecture, hexagonal and DDD. PostgreSQL · AWS · LLM integration (RAG, LangChain).",
       "t7": "See projects",
       "t8": "Selected work",
       "t9": "05 · CODE + CASE STUDIES",
@@ -511,10 +522,10 @@
       "t48": "02 · APIs &amp; Data",
       "t49": "Predictable and fast",
       "t50": "Consistent REST and GraphQL, strict validation, pooled Postgres, durable queues and idempotency.",
-      "t51": "03 · Security",
+      "t51": "04 · Security",
       "t52": "By default",
       "t53": "HMAC-signed webhooks, JWT sessions, server-side access and per-user isolation (fail-closed).",
-      "t54": "04 · AI &amp; LLMs",
+      "t54": "05 · AI &amp; LLMs",
       "t55": "Applied",
       "t56": "RAG, LangChain and OpenAI; spec-driven development with Claude Code and role-specialized agents.",
       "t57": "TOOLS",
@@ -526,13 +537,23 @@
       "t63": "Email",
       "t64": "© 2026 · Gabriel Antaño Locia · Portfolio",
       "t65": "Remote · Mexico",
-      "t66": "Tlazohcamati · thanks for stopping by"
+      "t66": "Tlazohcamati · thanks for stopping by",
+      "t67": "<i><\/i>Public code",
+      "t68": "<i><\/i>Private code",
+      "t69": "<b>Public code:<\/b> you can review it on GitHub. <b>Private code:<\/b> client work, so there is no link.",
+      "t70": "03 · Interfaces",
+      "t71": "Clear and connected",
+      "t72": "Next.js and React with Tailwind and i18n: self-service portals and boards connected to my own APIs, with data access kept on the server.",
+      "t73": "06 · Quality",
+      "t74": "Ship with confidence",
+      "t75": "Automated tests (Vitest, Jest), CI on GitHub Actions and Docker: 51 tests in the public showcase and nearly 100 test files in the quoting service.",
+      "t76": "Interfaces in <b>Next.js 14<\/b> with Tailwind and i18n for the customer portal and the recruitment kanban board."
 };
     var desc = document.querySelector('meta[name="description"]');
     var META = {
       es: { title: document.title, desc: desc.content },
       en: { title: "Gabriel Antaño Locia — Full-Stack Engineer",
-            desc: "Portfolio of Gabriel Antaño Locia, backend-leaning Full-Stack Engineer: Node.js, TypeScript and Python; Clean Architecture, hexagonal and DDD; PostgreSQL, AWS and LLMs." }
+            desc: "Portfolio of Gabriel Antaño Locia, Full-Stack Engineer: APIs in Node.js, TypeScript and Python and interfaces in React and Next.js; Clean Architecture, hexagonal and DDD; PostgreSQL, AWS and LLMs." }
     };
     var nodes = document.querySelectorAll("[data-i18n]");
     var ES = [];
