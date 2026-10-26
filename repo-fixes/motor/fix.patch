@@ -1,0 +1,66 @@
+diff --git a/README.md b/README.md
+index 7bb3bf532057c15089c0150c72aec4629b343937..7e352b43e1689239d28a1297218b9f6fe7382087 100644
+GIT binary patch
+literal 1174
+zcma)5O>Yx15WV|XjFL;Tq?-=}NJSh<3mhm_1>(#)_9SuHwYRpnN>x?r32`o*xN+=(
+zQx8ap6Z=o{OBmZt)rJevN|~J<&%Al>xeJx?#=`32E4+!3M35+yQ|+~;2!w5~r1FNb
+zU0#Z&<Pe_rhem$)bBG%a&Xh_h&$UNzIB$PZs(~!?sy3lSx7U@@Jj<ZBv%2`Q*B^v-
+zSvEtli2bO#wyHu4Sk)yOsyt0C=Ixb6ONjwx=14IQ6D`)p(lpf6=5X&N9S}xCX&ilW
+zP3gI$kVc<yt0)rOrT5x4IOREG-7f4BECaJf3uQECtca}SN3H-|hW;E1k=FOPYmo@)
+zg_RCW*k%9`{$a%ZBElXdgr;9?Gd9lQmOGkVp+g7Wa_vN8txEVDLB#U@@;RI2@Vs$?
+zhxI(4mOQRPN9WY2=dk9MOG*+(xFM(?+GJT}v^P+ZP^wBS-b;U9ru1<`5*tfY)kaI2
+zLZci95>U<C-zd2xwl~zv*~2><1^I6L&|cSGRY6^0h))_=@l!%3ahn0a78Lauo&j+N
+z4`B8ATd(3v`o9dBez7i@+?I^;(fG+D`12DsD%l>MG+3S>6ldXZl4L;Rmg~?&C}n!x
+zR~q5GAhC<&9FK3KZ=%F;|LB+vbI|HiO`D@&G@kg6<|3QDRz7G_h-iin$%T0>XJH6A
+z>b;{IQxwINy9Jw5u_z5;Sa@H%?ctCzi)NY=O~Y4wx<gX!8=?3x`HsFaA=A}lx~@QJ
+z=XqJim?G<m&6{6$eHZ>g62?aiM~=~za30Rc{qYX3O$_J6wZ-E`S?qQ4G``b+%GgF>
+zud~w`KxZ<VOtwakx5kt3HVc)*A*?=KQtSVgA>ks9-gz!QGIn4jk`6)UL@fIY1BRFY
+
+literal 832
+zcmZva!Ab)`5JdYd_zwd)8_}a6C{cqbBH{<QS!1%2-3^=MpeO&&AMhZ8M-QI7tFL-?
+zLWmM(XVTSOUDY!`-yI89T5WSyW1F^Niu7%06|1q#ZXF5iLy#-JQ;*C!&4|Q!kK7N=
+zg);@P3hdI3?8I5cd`!No0t^it51jKhf8-UhW3Yu+7kux$SLs!eGexqtGWG~C)m}AW
+zm#&7I8B7!MqKl+<0-D=9NbY#e|L7uLb1|h-GZ0>&Mf#*7d7l&2G!k<F`(mC_o>_P4
+zyyH{de|dTfb`3)gUemv}k$sY>`UR{7vBDmS+<H_~)7k>RAX_TCc29naM)zk_&Hr?J
+zehqd?Crv$rIiqiZzG|7d16#13E0JQ|o2Da|(O10BhPvAJye@zTyYb(^RgPEUBUhsN
+z%AMX&z@u0W+I@`E0ey8}C7gXY26jlU-rzY)Dl^+&d6(U`R<2|JoLQ{DT%o(}s6u@S
+fu6s!C<x3f9#XHe_3OeeZ|9h7yJ26JKrk(aL?yZcn
+
+diff --git a/motor.js b/motor.js
+index 51d8e0e..0d02ae7 100644
+--- a/motor.js
++++ b/motor.js
+@@ -1,4 +1,4 @@
+-export const calculateCredit  = (tipoNomina, fechaPrimerEmpleo, genero) => {
++const calculateCredit = (tipoNomina, fechaPrimerEmpleo, genero) => {
+ 
+     const creditAmounts = {
+         m: {
+@@ -65,3 +65,5 @@ export const calculateCredit  = (tipoNomina, fechaPrimerEmpleo, genero) => {
+         optimalCreditLine: Math.round(optimalCreditLine) 
+     };
+ }
++
++module.exports = { calculateCredit };
+diff --git a/package.json b/package.json
+index bc39f45..096cc30 100644
+--- a/package.json
++++ b/package.json
+@@ -1,14 +1,14 @@
+ {
+   "name": "motor",
+   "version": "1.0.0",
+-  "description": "��#\u0000 \u0000m\u0000o\u0000t\u0000o\u0000r\u0000\r\u0000 \u0000",
++  "description": "Motor de decisión de crédito: calcula montos mínimo, máximo y línea óptima y genera un reporte en PDF.",
+   "main": "motor.js",
+   "scripts": {
+     "test": "echo \"Error: no test specified\" && exit 1",
+-    "start": "node generateReport.js "
++    "start": "node generateReport.js"
+   },
+   "keywords": [],
+-  "author": "",
++  "author": "Gabriel Antaño Locia",
+   "license": "ISC",
+   "dependencies": {
+     "pdfkit": "^0.16.0"

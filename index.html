@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#09090b">
+<title>Gabriel Antaño Locia — Full-Stack Engineer</title>
+<meta name="description" content="Portafolio de Gabriel Antaño Locia: Full-Stack Engineer backend-leaning. Node.js, TypeScript y Python; Clean Architecture, hexagonal y DDD; PostgreSQL, AWS y LLMs.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gabriel Antaño Locia — Full-Stack Engineer">
+<meta property="og:description" content="Software que aguanta producción. Node.js · TypeScript · Python · Clean Architecture · PostgreSQL · AWS · LLMs.">
+<meta property="og:url" content="https://gabantolocia.github.io/">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2309090b'/%3E%3Ctext x='16' y='23' font-family='Arial Narrow,Arial,sans-serif' font-weight='700' font-size='18' text-anchor='middle' fill='%23E11D2A'%3EGA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+  /* ── Dirección: "setlist" industrial — negro, caps condensadas tipo póster de metal,
+     hairlines rojas, plata cromada; proyectos y trayectoria listados como una discografía. ── */
+  :root{
+    color-scheme: dark;
+    --bg:#09090b; --bg-2:#111113; --bg-3:#17171a;
+    --ink:#ECEAE4; --muted:#8d8d95; --line:#242428;
+    --chrome:#C3C8D0; --red:#E11D2A; --red-ink:#ff5a63;
+    --display:"Anton","Arial Narrow",system-ui,sans-serif;
+    --body:"Barlow",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --maxw:1120px;
+    --gutter:max(20px, env(safe-area-inset-left,0px));
+    --gutter-r:max(20px, env(safe-area-inset-right,0px));
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.045;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  img{max-width:100%}
+  a{color:inherit}
+  :focus-visible{outline:2px solid var(--red-ink);outline-offset:3px;border-radius:2px}
+  [hidden]{display:none!important}
+  .wrap{max-width:var(--maxw);margin-inline:auto;padding-left:var(--gutter);padding-right:var(--gutter-r)}
+  .band{position:relative;z-index:2}
+  section[id]{scroll-margin-top:84px}
+  .skip{position:absolute;left:-9999px;top:0;z-index:40;background:var(--red);color:#fff;font-family:var(--mono);font-size:12px;padding:10px 14px;text-decoration:none}
+  .skip:focus{left:8px;top:8px}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--chrome)}
+  .mono{font-family:var(--mono)}
+
+  header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid var(--line)}
+  body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+  .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+  .brand{font-family:var(--display);font-size:23px;letter-spacing:.05em;line-height:1;text-transform:uppercase;white-space:nowrap}
+  .brand b{color:var(--red);font-weight:400}
+  nav.links{display:flex;gap:24px;align-items:center}
+  nav.links a{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:6px 2px;transition:color .18s}
+  nav.links a:hover{color:var(--ink)}
+  .status{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--chrome);border:1px solid var(--line);padding:7px 12px;white-space:nowrap}
+  .dot{width:7px;height:7px;background:#39d353;border-radius:50%;animation:pulse 2.6s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(57,211,83,.45)}70%{box-shadow:0 0 0 7px rgba(57,211,83,0)}100%{box-shadow:0 0 0 0 rgba(57,211,83,0)}}
+  @media(max-width:820px){nav.links{display:none}}
+
+  .hero{padding-block:62px 54px;border-bottom:1px solid var(--line)}
+  .hero .eyebrow{display:block;margin-bottom:20px;max-width:60ch}
+  h1.masthead{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(50px,12.5vw,146px);line-height:.9;letter-spacing:.005em;margin:0;text-wrap:balance}
+  h1.masthead .red{color:var(--red)}
+  .hero .lede{max-width:58ch;margin:24px 0 0;color:var(--muted);font-size:clamp(16px,2.4vw,20px)}
+  .hero .lede b{color:var(--ink);font-weight:600}
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
+  .btn{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border:1px solid var(--ink);transition:transform .16s,background .16s,color .16s,border-color .16s}
+  .btn.primary{background:var(--red);border-color:var(--red);color:#fff}
+  .btn.primary:hover{background:var(--red-ink);border-color:var(--red-ink)}
+  .btn.ghost:hover{background:var(--ink);color:var(--bg)}
+  .btn:active{transform:translateY(1px)}
+
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding-top:56px;margin-bottom:6px}
+  .sec-head h2{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(28px,5vw,46px);line-height:1;letter-spacing:.02em;margin:0}
+  .sec-head .count{font-family:var(--mono);color:var(--muted);font-size:12px;letter-spacing:.16em;text-align:right}
+
+  .work{padding-bottom:26px}
+  .rec{display:grid;grid-template-columns:84px 1fr auto;gap:28px;align-items:start;padding:28px 4px;border-top:1px solid var(--line);transition:background .2s}
+  .work .rec:last-child{border-bottom:1px solid var(--line)}
+  .rec:hover{background:linear-gradient(90deg,color-mix(in srgb,var(--red) 7%,transparent),transparent 42%)}
+  .rec .num{font-family:var(--display);font-size:46px;line-height:.8;color:var(--line)}
+  .rec:hover .num{color:var(--red)}
+  .rec h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(23px,4vw,33px);line-height:1;letter-spacing:.015em;margin:2px 0 0}
+  .rec .slug{font-family:var(--mono);font-size:12px;color:var(--chrome);letter-spacing:.04em;margin:10px 0 0}
+  .rec p.what{margin:13px 0 0;color:var(--ink);max-width:60ch}
+  .rec p.note{margin:9px 0 0;color:var(--muted);font-size:15px;max-width:62ch}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}
+  .tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--chrome);border:1px solid var(--line);padding:5px 9px;white-space:nowrap}
+  .rec .go{display:flex;flex-direction:column;gap:10px;align-items:flex-end;text-align:right}
+  .rec .go a{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;white-space:nowrap;min-height:40px;display:inline-flex;align-items:center}
+  .rec .go a:hover{color:var(--red-ink)}
+  .rec .go a.live{color:var(--ink);border-bottom:1px solid var(--red)}
+  .rec .go a.live:hover{color:var(--red-ink);border-color:var(--red-ink)}
+  .rec .go .case{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:6px 9px;white-space:nowrap;align-self:center}
+  @media(max-width:760px){.rec{grid-template-columns:52px 1fr;gap:16px}.rec .num{font-size:30px}.rec .go{grid-column:2;flex-direction:row;align-items:center;justify-content:flex-start;gap:20px;text-align:left;margin-top:12px}}
+
+  /* trayectoria */
+  .cv{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .tl{margin:30px 0 6px}
+  .job{display:grid;grid-template-columns:200px 1fr;gap:28px;padding:24px 2px;border-top:1px solid var(--line)}
+  .job:last-child{border-bottom:1px solid var(--line)}
+  .job .when{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--chrome)}
+  .job .when b{display:block;color:var(--muted);font-weight:400;margin-top:6px;text-transform:uppercase;letter-spacing:.12em;font-size:11px}
+  .job h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:21px;letter-spacing:.02em;margin:0 0 3px}
+  .job .org{font-family:var(--mono);font-size:12.5px;color:var(--red-ink);margin-bottom:10px}
+  .job ul{margin:0;padding-left:18px;color:var(--muted);font-size:15px}
+  .job li{margin:5px 0}
+  .job li b{color:var(--ink);font-weight:600}
+  @media(max-width:700px){.job{grid-template-columns:1fr;gap:10px}.job .when{display:flex;gap:14px;align-items:baseline}.job .when b{margin-top:0}}
+
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);margin:32px 0 10px;border:1px solid var(--line)}
+  .cell{background:var(--bg-2);padding:26px 22px}
+  .cell .k{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--red-ink)}
+  .cell h3{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:20px;letter-spacing:.02em;margin:12px 0 10px}
+  .cell p{margin:0;color:var(--muted);font-size:14.5px}
+  @media(max-width:860px){.grid4{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:480px){.grid4{grid-template-columns:1fr}}
+
+  .stack{padding-block:38px 6px}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+  .chip{font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:var(--ink);border:1px solid var(--line);padding:9px 13px}
+  .chip:nth-child(3n+1){color:var(--chrome)}
+  .edu{display:flex;flex-wrap:wrap;gap:10px 30px;margin-top:26px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+  .edu .mono{color:var(--chrome);font-size:12px}
+
+  .contact{margin-top:54px;border-top:1px solid var(--line);background:radial-gradient(1200px 300px at 20% -40%,color-mix(in srgb,var(--red) 16%,transparent),transparent 70%),var(--bg)}
+  .contact .wrap{padding-block:70px}
+  .contact h2{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(38px,9vw,90px);line-height:.92;letter-spacing:.01em;margin:0;text-wrap:balance}
+  .contact p{color:var(--muted);max-width:52ch;margin:18px 0 26px}
+  .reach{display:flex;flex-wrap:wrap;gap:12px 30px}
+  .reach .row{display:flex;flex-direction:column;gap:4px}
+  .reach .lab{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .reach .val{font-family:var(--mono);font-size:clamp(14px,3vw,19px);color:var(--ink);border-bottom:1px solid var(--red);padding-bottom:3px;text-decoration:none;overflow-wrap:anywhere}
+
+  footer.foot{border-top:1px solid var(--line);background:var(--bg)}
+  .foot .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;padding-block:26px;color:var(--muted)}
+  .foot .mono{font-size:12px;letter-spacing:.08em}
+  .ph{color:var(--red-ink)}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<a href="#trabajo" class="skip">Saltar al contenido</a>
+<header class="top band">
+  <div class="wrap">
+    <div class="brand">ANTAÑO<b>·</b>LOCIA</div>
+    <nav class="links" aria-label="Secciones">
+      <a href="#trabajo">Trabajo</a>
+      <a href="#trayectoria">Trayectoria</a>
+      <a href="#stack">Stack</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <span class="status"><span class="dot" aria-hidden="true"></span>Disponible · Remoto</span>
+  </div>
+</header>
+
+<main>
+  <section class="hero band">
+    <div class="wrap">
+      <span class="eyebrow">Gabriel Antaño Locia — Full-Stack Engineer (Backend-leaning)</span>
+      <h1 class="masthead">Software<br>que <span class="red">aguanta</span><br>producción.</h1>
+      <p class="lede">+4 años construyendo backend con <b>Node.js, TypeScript y Python.</b> Clean Architecture, arquitectura hexagonal y DDD. PostgreSQL · AWS · integración de LLMs (RAG, LangChain).</p>
+      <div class="cta-row">
+        <a class="btn primary" href="#trabajo">Ver proyectos</a>
+        <a class="btn ghost" href="#contacto">Contacto</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="work band" id="trabajo">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Trabajo seleccionado</h2>
+        <span class="count">05 · CÓDIGO + CASOS</span>
+      </div>
+
+      <article class="rec">
+        <div class="num">01</div>
+        <div>
+          <h3>Backend Patterns Showcase</h3>
+          <div class="slug">backend-patterns-showcase · open source</div>
+          <p class="what">Servicio de referencia que escribí desde cero para demostrar patrones de backend senior, listo para correr sin servicios externos (adaptadores in-memory detrás de puertos).</p>
+          <p class="note">Arquitectura hexagonal, webhook con firma HMAC (fail-closed + anti-replay), cola idempotente con lease y reintentos, y auth con magic link. 51 tests (Vitest), CI en GitHub Actions y Docker.</p>
+          <div class="tags"><span class="tag">TypeScript</span><span class="tag">Node.js</span><span class="tag">Hexagonal</span><span class="tag">HMAC</span><span class="tag">Vitest</span><span class="tag">Docker</span></div>
+        </div>
+        <div class="go"><a class="live" href="https://github.com/GabAntoLocia/backend-patterns-showcase">Código →</a></div>
+      </article>
+
+      <article class="rec">
+        <div class="num">02</div>
+        <div>
+          <h3>Generador de Cotizaciones</h3>
+          <div class="slug">quote-generator · caso de estudio</div>
+          <p class="what">Servicio HTTP que cotiza en tiempo real desde el webhook de un formulario: valida dirección, resuelve zona, aplica pricing y entrega la cotización bilingüe (FR/EN) por correo y SMS, con aprobación en Slack.</p>
+          <p class="note">Respuesta inmediata + pipeline en background, colas durables e idempotencia con lease, cachés de geocoding, ~100 archivos de pruebas, Docker y GitHub Actions.</p>
+          <div class="tags"><span class="tag">Node.js</span><span class="tag">TypeScript</span><span class="tag">Express</span><span class="tag">PostgreSQL</span><span class="tag">Docker</span></div>
+        </div>
+        <div class="go"><span class="case">Caso de estudio</span></div>
+      </article>
+
+      <article class="rec">
+        <div class="num">03</div>
+        <div>
+          <h3>Tablero de Reclutamiento</h3>
+          <div class="slug">recruitment-portal · caso de estudio</div>
+          <p class="what">Tablero kanban para reclutar personal: ingesta por webhook, calificación determinista con reglas ponderadas y un agendador por enlace público con integración a Google Calendar.</p>
+          <p class="note">Arquitectura hexagonal, webhook con firma HMAC (fail-closed), recordatorios por cron y auth de equipo con revalidación en vivo. +50 archivos de pruebas (Vitest).</p>
+          <div class="tags"><span class="tag">Next.js 14</span><span class="tag">TypeScript</span><span class="tag">PostgreSQL</span><span class="tag">Hexagonal</span><span class="tag">Vitest</span></div>
+        </div>
+        <div class="go"><span class="case">Caso de estudio</span></div>
+      </article>
+
+      <article class="rec">
+        <div class="num">04</div>
+        <div>
+          <h3>Portal de Clientes</h3>
+          <div class="slug">customer-portal · caso de estudio</div>
+          <p class="what">Autoservicio para clientes: ven sus próximos servicios, consultan facturas con link de pago y envían solicitudes (reagenda/cancelación) a una cola de aprobación con avisos a Slack.</p>
+          <p class="note">Login sin contraseña (magic link) y acceso a datos aislado por cliente: el identificador sale siempre de la sesión — anti-IDOR, fail-closed.</p>
+          <div class="tags"><span class="tag">Next.js 14</span><span class="tag">TypeScript</span><span class="tag">PostgreSQL</span><span class="tag">Tailwind</span><span class="tag">i18n</span></div>
+        </div>
+        <div class="go"><span class="case">Caso de estudio</span></div>
+      </article>
+
+      <article class="rec">
+        <div class="num">05</div>
+        <div>
+          <h3>Detección de Dengue</h3>
+          <div class="slug">dengue-detection-api · Python</div>
+          <p class="what">API que ingiere y procesa audios de mosquitos y hace búsqueda semántica de patrones con bases de datos vectoriales para apoyar la detección temprana.</p>
+          <p class="note">Python / FastAPI, embeddings y vector search (Pinecone / OpenSearch). Proyecto de I+D que combina audio, ML e infraestructura de datos.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Vector DB</span><span class="tag">RAG</span><span class="tag">ML</span></div>
+        </div>
+        <div class="go"><span class="case">Caso de estudio</span></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="cv band" id="trayectoria">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Trayectoria</h2>
+        <span class="count">+4 AÑOS · REMOTO</span>
+      </div>
+      <div class="tl">
+        <div class="job">
+          <div class="when">Sep 2025 — Oct 2026<b>Full-Stack Engineer</b></div>
+          <div>
+            <h3>Plataforma de servicios</h3>
+            <div class="org">Remoto · Node.js · TypeScript · Next.js · PostgreSQL/Supabase</div>
+            <ul>
+              <li>Construí <b>tres sistemas en producción</b>: cotizador automático, portal de clientes y tablero de reclutamiento.</li>
+              <li>Colas durables, workers e <b>idempotencia</b>; cerca de 100 archivos de pruebas; despliegue con Docker y GitHub Actions.</li>
+              <li><b>Spec-driven development con Claude Code</b>: agentes especializados (producto, arquitectura, backend, frontend, QA, revisión) y una especificación por feature.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="job">
+          <div class="when">Feb 2025 — Ene 2026<b>Full-Stack Engineer</b></div>
+          <div>
+            <h3>The Rocketcode</h3>
+            <div class="org">Remoto · Next.js · Node.js · Python/FastAPI</div>
+            <ul>
+              <li>Aplicaciones web con <b>Clean Architecture y DDD</b>; APIs REST y GraphQL.</li>
+              <li>Backend en Python/FastAPI para <b>extracción y conciliación de pólizas de seguro</b>, automatizando validación de datos.</li>
+              <li>Code reviews y gestión de PRs en GitHub.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="job">
+          <div class="when">2021 — Oct 2024<b>Full-Stack Developer</b></div>
+          <div>
+            <h3>iVentas / Mobieffects</h3>
+            <div class="org">Node.js · React · Python · REST/GraphQL</div>
+            <ul>
+              <li>Aplicaciones web con Node.js y React, integración con HubSpot, despliegues con Git y Docker.</li>
+              <li>Servicios backend en Python para un repositorio de <b>chatbots</b> (flujos conversacionales y mensajería).</li>
+              <li>Testing y monitoreo de <b>LLMs</b> (OpenAI) para automatización de citas.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="approach band" id="enfoque">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Enfoque</h2>
+        <span class="count">CÓMO TRABAJO</span>
+      </div>
+      <div class="grid4">
+        <div class="cell"><div class="k">01 · Arquitectura</div><h3>Capas limpias</h3><p>Clean Architecture, hexagonal y DDD con criterio: dominio puro, casos de uso e infraestructura intercambiable. Sin sobre-ingeniería.</p></div>
+        <div class="cell"><div class="k">02 · APIs &amp; Datos</div><h3>Predecible y rápido</h3><p>REST y GraphQL consistentes, validación estricta, Postgres con pooling, colas durables e idempotencia.</p></div>
+        <div class="cell"><div class="k">03 · Seguridad</div><h3>Por defecto</h3><p>Firma HMAC en webhooks, sesiones JWT, acceso server-side y aislamiento por usuario (fail-closed).</p></div>
+        <div class="cell"><div class="k">04 · IA &amp; LLMs</div><h3>Aplicada</h3><p>RAG, LangChain y OpenAI; spec-driven development con Claude Code y agentes especializados por rol.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stack band" id="stack">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Stack</h2>
+        <span class="count">HERRAMIENTAS</span>
+      </div>
+      <div class="chips">
+        <span class="chip">TypeScript</span><span class="chip">JavaScript</span><span class="chip">Node.js</span>
+        <span class="chip">Python</span><span class="chip">Express</span><span class="chip">FastAPI</span>
+        <span class="chip">Next.js</span><span class="chip">React</span><span class="chip">GraphQL</span>
+        <span class="chip">PostgreSQL</span><span class="chip">Supabase</span><span class="chip">Vector DB</span>
+        <span class="chip">AWS</span><span class="chip">Docker</span><span class="chip">GitHub Actions</span>
+        <span class="chip">Clean Architecture</span><span class="chip">DDD</span><span class="chip">Vitest · Jest</span>
+      </div>
+      <div class="edu">
+        <span><span class="mono">FORMACIÓN</span> &nbsp;Ingeniero en Computación — Universidad Autónoma de Guerrero (2021)</span>
+        <span><span class="mono">CERT</span> &nbsp;AWS Solutions Architect – Associate · curso oficial (2024)</span>
+        <span><span class="mono">IDIOMAS</span> &nbsp;Español nativo · Inglés básico–intermedio</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact band" id="contacto">
+    <div class="wrap">
+      <h2>Construyamos<br>algo sólido.</h2>
+      <p>¿Tienes un sistema que tiene que funcionar de verdad? Hablemos.</p>
+      <div class="reach">
+        <div class="row"><span class="lab">Correo</span><a class="val" href="mailto:locciaa1@gmail.com" data-link="email">locciaa1@gmail.com</a></div>
+        <div class="row"><span class="lab">GitHub</span><a class="val" href="https://github.com/GabAntoLocia" data-link="github">github.com/GabAntoLocia</a></div>
+        <div class="row"><span class="lab">Open source</span><a class="val" href="https://github.com/GabAntoLocia/backend-patterns-showcase">backend-patterns-showcase</a></div>
+        <div class="row"><span class="lab">LinkedIn</span><span class="val">Gabriel Antaño Locia</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot band">
+  <div class="wrap">
+    <span class="brand" style="font-size:19px">ANTAÑO<b>·</b>LOCIA</span>
+    <span class="mono">© 2026 · Gabriel Antaño Locia · Portafolio</span>
+    <span class="mono" style="color:var(--chrome)">Remoto · México</span>
+  </div>
+</footer>
+
+</body>
+</html>
