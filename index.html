@@ -148,6 +148,12 @@
   .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
   .chip{font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:var(--ink);border:1px solid var(--line);padding:9px 13px}
   .chip:nth-child(3n+1){color:var(--chrome)}
+  .chip{transition:opacity .5s ease,transform .5s cubic-bezier(.2,.7,.2,1),border-color .18s,color .18s,background .18s}
+  .chip:hover{border-color:var(--red);color:#fff;background:color-mix(in srgb,var(--red) 10%,transparent);transform:translateY(-2px)}
+  /* entrada escalonada al llegar a la sección (solo con JS; sin JS todo queda visible) */
+  .js .chips:not(.in) .chip{opacity:0;transform:translateY(14px)}
+  .js .chips.in .chip{transition-delay:calc(var(--i,0) * 45ms),calc(var(--i,0) * 45ms),0s,0s,0s}
+  .js .chips.in .chip:hover{transition-delay:0s}
   .edu{display:flex;flex-wrap:wrap;gap:10px 30px;margin-top:26px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
   .edu .mono{color:var(--chrome);font-size:12px}
 
@@ -507,6 +513,17 @@
       if (sec) sections.push([a, sec]);
     });
     var ticking = false;
+
+    var chips = document.querySelector(".chips");
+    if (chips) {
+      chips.querySelectorAll(".chip").forEach(function (c, i) { c.style.setProperty("--i", i); });
+      if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(function (es) {
+          if (es[0].isIntersecting) { chips.classList.add("in"); io.disconnect(); }
+        }, { threshold: 0.25 });
+        io.observe(chips);
+      } else { chips.classList.add("in"); }
+    }
 
     // En cada grupo, el hito cuyo centro queda más cerca del centro del viewport recibe el foco.
     function update() {
