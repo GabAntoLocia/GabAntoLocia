@@ -154,6 +154,14 @@
   .js .chips:not(.in) .chip{opacity:0;transform:translateY(14px)}
   .js .chips.in .chip{transition-delay:calc(var(--i,0) * 45ms),calc(var(--i,0) * 45ms),0s,0s,0s}
   .js .chips.in .chip:hover{transition-delay:0s}
+
+  /* modo "campo": las etiquetas flotan, rebotan entre sí y huyen del cursor (JS; sin movimiento reducido) */
+  .chips{position:relative}
+  .chips.play{display:block;overflow:hidden;touch-action:pan-y;box-shadow:inset 0 0 0 1px var(--line);background:radial-gradient(520px 220px at 50% 0%,color-mix(in srgb,var(--red) 8%,transparent),transparent 70%)}
+  .chips.play .chip{position:absolute;left:0;top:0;will-change:transform;scale:1;cursor:default}
+  .js .chips.play .chip{transition:opacity .5s ease,border-color .18s,color .18s,background .18s,scale .2s}
+  .js .chips.play.in .chip{transition-delay:calc(var(--i,0) * 45ms),0s,0s,0s,0s}
+  .chips.play .chip:hover{scale:1.1;z-index:2}
   .edu{display:flex;flex-wrap:wrap;gap:10px 30px;margin-top:26px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
   .edu .mono{color:var(--chrome);font-size:12px}
 
@@ -555,5 +563,131 @@
   })();
 </script>
 
+<script>
+  (function () {
+    var box = document.querySelector(".chips");
+    if (!box) return;
+    var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)");
+    if ((reduce && reduce.matches) || !("IntersectionObserver" in window) || !window.requestAnimationFrame) return;
+
+    var chips = Array.prototype.slice.call(box.querySelectorAll(".chip"));
+    var M = 6, GAP = 8, CRUISE_MIN = 18, CRUISE_MAX = 42, MAXV = 280, R = 120;
+    var items = [], W = 0, H = 0, raf = 0, last = 0, timer = 0;
+    var ptr = { x: 0, y: 0, on: false };
+
+    // Mide el layout normal (flex) y lo toma como punto de partida: las etiquetas "se sueltan" desde ahí.
+    function build(keep) {
+      var prev = keep ? items : null, prevW = W;
+      box.classList.remove("play");
+      box.style.height = "";
+      W = box.clientWidth;
+      var area = 0;
+      items = chips.map(function (el, i) {
+        var it = { el: el, x: el.offsetLeft, y: el.offsetTop, w: el.offsetWidth, h: el.offsetHeight };
+        var a = Math.random() * Math.PI * 2, v = CRUISE_MIN + Math.random() * (CRUISE_MAX - CRUISE_MIN) * 0.7;
+        it.vx = Math.cos(a) * v; it.vy = Math.sin(a) * v;
+        if (prev && prev[i]) { it.x = prev[i].x * W / prevW; it.y = prev[i].y; it.vx = prev[i].vx; it.vy = prev[i].vy; }
+        area += (it.w + GAP) * (it.h + GAP);
+        return it;
+      });
+      H = Math.round(Math.min(560, Math.max(280, area * 2 / W)));
+      box.style.height = H + "px";
+      box.classList.add("play");
+      items.forEach(clamp);
+      relax();
+      draw();
+    }
+    // Separa dos etiquetas encimadas por el eje de menor penetración; si empujar en X las
+    // estrellaría contra una pared (fila llena), se separan en vertical, donde siempre hay espacio.
+    function separate(a, b, swap) {
+      var cx = (a.x + a.w / 2) - (b.x + b.w / 2), cy = (a.y + a.h / 2) - (b.y + b.h / 2);
+      var ox = (a.w + b.w) / 2 + 4 - Math.abs(cx), oy = (a.h + b.h) / 2 + 4 - Math.abs(cy);
+      if (ox <= 0 || oy <= 0) return false;
+      var t, sx = cx < 0 ? -1 : 1, sy = cy < 0 ? -1 : 1;
+      var na = a.x + sx * ox / 2, nb = b.x - sx * ox / 2;
+      var fitX = na >= M && na <= W - a.w - M && nb >= M && nb <= W - b.w - M;
+      if (ox < oy && fitX) {
+        a.x = na; b.x = nb;
+        if (swap && sx * (a.vx - b.vx) < 0) { t = a.vx; a.vx = b.vx; b.vx = t; }
+      } else {
+        a.y += sy * oy / 2; b.y -= sy * oy / 2;
+        if (swap && sy * (a.vy - b.vy) < 0) { t = a.vy; a.vy = b.vy; b.vy = t; }
+      }
+      return true;
+    }
+    // Separa de golpe las etiquetas que queden encimadas (p. ej. tras cambiar el ancho de la pantalla).
+    function relax() {
+      for (var n = 0; n < 120; n++) {
+        var moved = false;
+        for (var i = 0; i < items.length; i++)
+          for (var j = i + 1; j < items.length; j++)
+            if (separate(items[i], items[j], false)) moved = true;
+        items.forEach(clamp);
+        if (!moved) break;
+      }
+    }
+    function clamp(a) {
+      a.x = Math.max(M, Math.min(W - a.w - M, a.x));
+      a.y = Math.max(M, Math.min(H - a.h - M, a.y));
+    }
+    function draw() {
+      items.forEach(function (a) { a.el.style.transform = "translate3d(" + a.x.toFixed(1) + "px," + a.y.toFixed(1) + "px,0)"; });
+    }
+
+    function step(dt) {
+      var i, j, a, d, f, sp, k;
+      for (i = 0; i < items.length; i++) {
+        a = items[i];
+        if (ptr.on) {
+          var dx = a.x + a.w / 2 - ptr.x, dy = a.y + a.h / 2 - ptr.y;
+          d = Math.sqrt(dx * dx + dy * dy) || 1;
+          if (d < R) { f = (1 - d / R) * 1100 * dt; a.vx += dx / d * f; a.vy += dy / d * f; }
+        }
+        sp = Math.sqrt(a.vx * a.vx + a.vy * a.vy);
+        if (sp > MAXV) { k = MAXV / sp; a.vx *= k; a.vy *= k; sp = MAXV; }
+        if (sp > CRUISE_MAX) { k = Math.max(CRUISE_MAX / sp, 1 - 1.4 * dt); a.vx *= k; a.vy *= k; }
+        else if (sp < CRUISE_MIN) { k = sp ? CRUISE_MIN / sp : 1; a.vx = sp ? a.vx * k : CRUISE_MIN; a.vy *= k; }
+        a.x += a.vx * dt; a.y += a.vy * dt;
+        if (a.x < M) { a.x = M; a.vx = Math.abs(a.vx); } else if (a.x > W - a.w - M) { a.x = W - a.w - M; a.vx = -Math.abs(a.vx); }
+        if (a.y < M) { a.y = M; a.vy = Math.abs(a.vy); } else if (a.y > H - a.h - M) { a.y = H - a.h - M; a.vy = -Math.abs(a.vy); }
+      }
+      // choques entre etiquetas: se separan e intercambian velocidad
+      for (i = 0; i < items.length; i++)
+        for (j = i + 1; j < items.length; j++) separate(items[i], items[j], true);
+      items.forEach(clamp);
+    }
+    function frame(t) {
+      raf = requestAnimationFrame(frame);
+      var dt = Math.min(0.05, (t - last) / 1000);
+      last = t;
+      if (dt > 0) { step(dt); draw(); }
+    }
+    function start() { if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); } }
+    function stop() { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
+
+    function point(e) { var r = box.getBoundingClientRect(); ptr.x = e.clientX - r.left; ptr.y = e.clientY - r.top; }
+    box.addEventListener("pointermove", function (e) { point(e); ptr.on = true; });
+    box.addEventListener("pointerleave", function () { ptr.on = false; });
+    box.addEventListener("pointercancel", function () { ptr.on = false; });
+    box.addEventListener("pointerup", function (e) { if (e.pointerType !== "mouse") ptr.on = false; });
+    // toque o clic: ráfaga que dispersa las etiquetas cercanas
+    box.addEventListener("pointerdown", function (e) {
+      point(e);
+      if (e.pointerType !== "mouse") ptr.on = true;
+      items.forEach(function (a) {
+        var dx = a.x + a.w / 2 - ptr.x, dy = a.y + a.h / 2 - ptr.y, d = Math.sqrt(dx * dx + dy * dy) || 1;
+        if (d < R * 1.5) { var f = (1 - d / (R * 1.5)) * 220; a.vx += dx / d * f; a.vy += dy / d * f; }
+      });
+    });
+
+    new IntersectionObserver(function (es) { es[0].isIntersecting ? start() : stop(); }).observe(box);
+    window.addEventListener("resize", function () {
+      clearTimeout(timer);
+      timer = setTimeout(function () { if (box.clientWidth !== W) build(true); }, 150);
+    });
+    var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+    ready.then(function () { build(false); });
+  })();
+</script>
 </body>
 </html>
