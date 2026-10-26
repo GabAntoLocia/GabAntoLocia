@@ -125,7 +125,7 @@
   /* trayectoria */
   .cv{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .tl{margin:30px 0 6px}
-  .job{display:grid;grid-template-columns:200px 1fr;gap:28px;padding:24px 2px;border-top:1px solid var(--line)}
+  .job{display:grid;grid-template-columns:200px 1fr;gap:28px;padding:24px 22px;border-top:1px solid var(--line)}
   .job:last-child{border-bottom:1px solid var(--line)}
   .job .when{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--chrome)}
   .job .when b{display:block;color:var(--muted);font-weight:400;margin-top:6px;text-transform:uppercase;letter-spacing:.12em;font-size:11px}
@@ -178,7 +178,8 @@
   .lang button{appearance:none;background:none;border:0;color:var(--muted);font:inherit;letter-spacing:inherit;padding:7px 10px;min-height:32px;cursor:pointer;transition:color .18s,background .18s}
   .lang button:hover{color:var(--ink)}
   .lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
-  @media(max-width:520px){.status{display:none}}
+  .status-hero{display:none;margin-bottom:22px}
+  @media(max-width:520px){.top-r .status{display:none}.status-hero{display:inline-flex}}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -206,6 +207,7 @@
 <main>
   <section class="hero band">
     <div class="wrap">
+      <span class="status status-hero" data-i18n="t4"><span class="dot" aria-hidden="true"></span>Disponible · Remoto</span>
       <span class="eyebrow">Gabriel Antaño Locia — Full-Stack Engineer (Backend-leaning)</span>
       <h1 class="masthead" data-i18n="t5">Software<br>que <span class="red">aguanta</span><br>producción.</h1>
       <p class="lede" data-i18n="t6">+4 años construyendo backend con <b>Node.js, TypeScript y Python.</b> Clean Architecture, arquitectura hexagonal y DDD. PostgreSQL · AWS · integración de LLMs (RAG, LangChain).</p>
