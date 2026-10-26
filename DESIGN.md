@@ -31,8 +31,8 @@ Regla: rojo manda; verde, azul, oro y rosa aparecen en pequeñas dosis (líneas,
 ## Motivos mexicas
 | Motivo | Dónde | Reglas |
 |---|---|---|
-| **Quetzalcóatl descendiendo** | Detrás del penacho, mismo bloque (`.serpiente`) | Serpiente emplumada estilizada en SVG (cuerpo verde con bandas turquesa y puntos de oro, cabeza con mandíbula abierta, colmillos y plumas de quetzal, cotinga y espátula). Baja desde el borde inferior del hero siguiendo el scroll y termina con la cabeza detrás del penacho, junto a la greca; reversible. Opacidad .42, saturación .7. Con movimiento reducido queda ya descendida y quieta; sin JS no aparece |
-| **Penacho tras "Trabajo"** | Solo antes de la primera sección (`.corona`) | Abanico estilizado de plumas de quetzal, hilera azul de cotinga, hilera rosa de espátula y diadema de oro; ilustración propia en SVG (plantilla `#penacho-tpl`). Está *detrás* de la sección (la sección y la greca tienen fondo opaco): sube desde ahí y se abre fila por fila según el scroll (`--p`, `--u1..3`, `--b`), reversible. Ya abierto, se mece ±1.3° (8 s) y su brillo oscila ±7° (9 s). Opacidad máx. .54, saturación .7. Con movimiento reducido o sin scroll queda abierto y quieto; sin JS no aparece |
+| **Quetzalcóatl descendiendo** | Capa fija detrás de todo el contenido (`.quetzal`) | Serpiente emplumada estilizada en SVG (cuerpo verde con bandas turquesa y puntos de oro; cabeza con mandíbula abierta, colmillos y plumas de quetzal, cotinga y espátula). Su cabeza baja por la pantalla con el scroll (≈14 % de la altura arriba al inicio → ≈82 % al final) y el cuerpo sigue una curva sinusoidal anclada a la página, así que cruza por detrás de cada sección. Las secciones deben ser translúcidas (no poner fondos opacos a `.work`, `.cv`, `.contact`, pie). Opacidad .3, saturación .75, se desvanece hacia arriba. Con movimiento reducido o sin JS no aparece |
+| **Penacho tras "Trabajo"** | Solo antes de la primera sección (`.corona`) | Abanico estilizado de plumas de quetzal, hilera azul de cotinga, hilera rosa de espátula y diadema de oro; ilustración propia en SVG (plantilla `#penacho-tpl`). Está *detrás* de la sección (el bloque `.corona` recorta con `clip-path` lo que queda bajo la greca): sube desde ahí y se abre fila por fila según el scroll (`--p`, `--u1..3`, `--b`), reversible. Ya abierto, se mece ±1.3° (8 s) y su brillo oscila ±7° (9 s). Opacidad máx. .54, saturación .7. Con movimiento reducido o sin scroll queda abierto y quieto; sin JS no aparece |
 | **Piedra del sol** (anillos, 20 signos del tonalpohualli, 8 rayos) | Fondo del hero (`.sol`) | Opacidad ≈ .1, gira 1 vuelta cada 6 min, `aria-hidden` |
 | **Línea iridiscente** | Borde inferior de la cabecera | Degradado quetzal → cotinga → oro → espátula, 1 px, opacidad .45 |
 | **Greca xicalcoliuhqui** | Frisos `.greca` entre secciones | Opacidad .5, desvanecida en los bordes |
@@ -44,7 +44,7 @@ Regla: rojo manda; verde, azul, oro y rosa aparecen en pequeñas dosis (líneas,
 ## Movimiento
 - **Foco al hacer scroll:** el hito más cercano al centro (proyectos y trayectoria) se ilumina; el resto se atenúa.
 - **Stack:** etiquetas que flotan, rebotan y huyen del cursor; solo corren con la sección visible.
-- **Quetzalcóatl y penacho ligados al scroll**: la serpiente desciende desde el hero y, detrás de "Trabajo", el penacho emerge, se abre y luego se mece.
+- **Quetzalcóatl y penacho ligados al scroll**: la serpiente desciende por todas las secciones y, detrás de "Trabajo", el penacho emerge, se abre y luego se mece.
 - Giro lento de la piedra del sol.
 - Todo se desactiva con `prefers-reduced-motion` y sin JavaScript la página queda completa y estática.
 

@@ -93,6 +93,10 @@
 
   .hero{padding-block:62px 54px;border-bottom:1px solid var(--line);overflow:hidden;background:radial-gradient(900px 420px at 88% 0%,color-mix(in srgb,var(--red) 9%,transparent),transparent 70%),radial-gradient(760px 320px at 0% 112%,color-mix(in srgb,var(--quetzal) 6%,transparent),transparent 70%)}
   .hero .wrap{position:relative;z-index:1}
+  /* Quetzalcóatl: serpiente emplumada que desciende por las secciones al ritmo del scroll (capa fija, detrás del contenido) */
+  .quetzal{display:none;position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.3;filter:saturate(.75);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 40%);mask-image:linear-gradient(to bottom,transparent 0,#000 40%)}
+  .js .quetzal{display:block}
+  @media (prefers-reduced-motion:reduce){.js .quetzal{display:none}}
   /* piedra del sol: anillos, 20 signos y rayos, casi invisible, girando muy despacio */
   .hero-art{position:absolute;z-index:0;right:max(-12%,-150px);top:50%;width:clamp(340px,58vw,720px);aspect-ratio:1;transform:translateY(-50%);pointer-events:none}
   .sol{position:absolute;inset:0;color:var(--chrome);opacity:.1}
@@ -116,14 +120,11 @@
   .sec-head .count{font-family:var(--mono);color:var(--muted);font-size:12px;letter-spacing:.16em;text-align:right}
 
   /* greca xicalcoliuhqui: friso escalonado que separa secciones; se desvanece en los bordes */
-  .greca{height:14px;margin-block:0;background:var(--greca) repeat-x center;background-color:var(--bg);opacity:.5;-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent)}
-  .work{padding-bottom:26px;background:var(--bg)}
+  .greca{height:14px;margin-block:0;background:var(--greca) repeat-x center;opacity:.5;-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent)}
+  .work{padding-bottom:26px}
   /* penacho tras la sección "Trabajo": sube desde detrás de ella y se abre según el scroll (--p, --u1..3, --b los pone el JS) */
-  .corona{--cw:clamp(170px,30vw,250px);--sw:calc(var(--cw) * 1.25);--p:1;--u1:1;--u2:1;--u3:1;--b:1;position:relative;height:calc(var(--sw) * 1.0667);margin-top:34px;clip-path:inset(0 -80px -30px -80px)}
-  /* Quetzalcóatl desciende por detrás del penacho: serpiente emplumada que baja desde el hero siguiendo el scroll */
-  .serpiente{display:none;position:absolute;left:50%;bottom:0;width:var(--sw);margin-left:calc(var(--sw) / -2);aspect-ratio:300 / 320;overflow:visible;opacity:.42;filter:saturate(.7);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 20%);mask-image:linear-gradient(to bottom,transparent 0,#000 20%)}
-  .js .serpiente{display:block}
-  .corona-fan{position:absolute;left:50%;bottom:-5px;width:var(--cw);margin-left:calc(var(--cw) / -2);opacity:calc(.12 + .42 * var(--p));transform:translateY(calc((1 - var(--p)) * 108%));filter:saturate(.7);animation:brillo 9s ease-in-out infinite}
+  .corona{--cw:clamp(170px,30vw,250px);--p:1;--u1:1;--u2:1;--u3:1;--b:1;position:relative;height:calc(var(--cw) * .54);margin-top:34px;clip-path:inset(0 -80px 0 -80px)}
+  .corona-fan{position:absolute;left:50%;bottom:-3px;width:var(--cw);margin-left:calc(var(--cw) / -2);opacity:calc(.12 + .42 * var(--p));transform:translateY(calc((1 - var(--p)) * 108%));filter:saturate(.7);animation:brillo 9s ease-in-out infinite}
   .corona-fan svg{display:block;width:100%;height:auto;overflow:visible;transform-origin:50% 96%;animation:vaiven 8s ease-in-out infinite alternate}
   .corona .f path[style]{transform-box:view-box;transform-origin:0 0}
   .corona .f1 path{transform:rotate(calc(var(--a) * var(--u1) * 1deg))}
@@ -155,7 +156,7 @@
   @media(max-width:760px){.rec{grid-template-columns:52px 1fr;gap:16px}.rec .num{font-size:30px}.rec .go{grid-column:2;flex-direction:row;align-items:center;justify-content:flex-start;gap:20px;text-align:left;margin-top:12px}}
 
   /* trayectoria */
-  .cv{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .cv{background:color-mix(in srgb,var(--bg-2) 50%,transparent);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .tl{margin:30px 0 6px}
   .job{display:grid;grid-template-columns:200px 1fr;gap:28px;padding:24px 22px;border-top:1px solid var(--line)}
   .job:last-child{border-bottom:1px solid var(--line)}
@@ -205,7 +206,7 @@
   .edu{display:flex;flex-wrap:wrap;gap:10px 30px;margin-top:26px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
   .edu .mono{color:var(--chrome);font-size:12px}
 
-  .contact{margin-top:14px;border-top:1px solid var(--line);background:radial-gradient(1200px 300px at 20% -40%,color-mix(in srgb,var(--red) 16%,transparent),transparent 70%),radial-gradient(700px 260px at 95% 115%,color-mix(in srgb,var(--oro) 11%,transparent),transparent 70%),var(--bg)}
+  .contact{margin-top:14px;border-top:1px solid var(--line);background:radial-gradient(1200px 300px at 20% -40%,color-mix(in srgb,var(--red) 16%,transparent),transparent 70%),radial-gradient(700px 260px at 95% 115%,color-mix(in srgb,var(--oro) 11%,transparent),transparent 70%)}
   .contact .wrap{padding-block:70px}
   .contact h2{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(38px,9vw,90px);line-height:.92;letter-spacing:.01em;margin:0;text-wrap:balance}
   .contact p{color:var(--muted);max-width:52ch;margin:18px 0 26px}
@@ -214,7 +215,7 @@
   .reach .lab{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
   .reach .val{font-family:var(--mono);font-size:clamp(14px,3vw,19px);color:var(--ink);border-bottom:1px solid var(--red);padding-bottom:3px;text-decoration:none;overflow-wrap:anywhere}
 
-  footer.foot{border-top:1px solid var(--line);background:var(--bg)}
+  footer.foot{border-top:1px solid var(--line)}
   .foot .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;padding-block:26px;color:var(--muted)}
   .foot .mono{font-size:12px;letter-spacing:.08em}
   .ph{color:var(--red-ink)}
@@ -238,6 +239,7 @@
 </style>
 </head>
 <body>
+<svg class="quetzal" aria-hidden="true" focusable="false"><path class="q-b q-base" fill="none" stroke="#0b4a35" stroke-linecap="round" stroke-linejoin="round"/><path class="q-b q-band" fill="none" stroke="#27b783" stroke-linejoin="round"/><path class="q-b q-dots" fill="none" stroke="#e0b04e" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/><g class="q-head" opacity="0"><g class="q-in"><path transform="rotate(-132)" d="M0 0 C6.0 -9.5 4.8 -24.5 0 -34.0 C-4.8 -24.5 -6.0 -9.5 0 0Z" fill="url(#gsp)"/><path transform="rotate(-112)" d="M0 0 C6.5 -11.2 5.2 -28.8 0 -40.0 C-5.2 -28.8 -6.5 -11.2 0 0Z" fill="url(#gcb)"/><path transform="rotate(-92)" d="M0 0 C7.0 -12.9 5.6 -33.1 0 -46.0 C-5.6 -33.1 -7.0 -12.9 0 0Z" fill="url(#gq2)"/><path transform="rotate(-72)" d="M0 0 C6.5 -11.2 5.2 -28.8 0 -40.0 C-5.2 -28.8 -6.5 -11.2 0 0Z" fill="url(#gq1)"/><path transform="rotate(-52)" d="M0 0 C6.0 -9.5 4.8 -24.5 0 -34.0 C-4.8 -24.5 -6.0 -9.5 0 0Z" fill="url(#gsp)"/><path d="M-6 -7C8 -13 28 -11 44 -2L42 2C27 0 10 0 -6 2Z" fill="#1c7f5c" stroke="#072b21" stroke-width=".8"/><path d="M-4 5C10 5 26 6 40 11C25 15 8 13 -4 10Z" fill="#138a5c" stroke="#072b21" stroke-width=".8"/><path d="M29 2L32 9L35 3Z M20 3L22.5 8L25 3.5Z" fill="#fff1b8"/><circle cx="13" cy="-5" r="2.6" fill="#f4cf6a"/><circle cx="13.6" cy="-5" r="1.1" fill="#072b21"/><path d="M36 -4.5h3" stroke="#072b21" stroke-width="1.2" stroke-linecap="round"/></g></g></svg>
 <a href="#trabajo" class="skip" data-i18n="t0">Saltar al contenido</a>
 <header class="top band">
   <div class="wrap">
@@ -273,7 +275,7 @@
     </div>
   </section>
 
-  <div class="corona band" aria-hidden="true"><svg class="serpiente" viewBox="0 0 300 320" aria-hidden="true" focusable="false"><defs><mask id="qv" maskUnits="userSpaceOnUse" x="-100" y="-400" width="500" height="800"><path class="q-win" d="M70.8 -330.0 L67.7 -326.0 L65.5 -322.0 L64.3 -318.0 L64.0 -314.0 L64.8 -310.0 L66.5 -306.0 L69.1 -302.0 L72.7 -298.0 L77.1 -294.0 L82.4 -290.0 L88.4 -286.0 L95.1 -282.0 L102.5 -278.0 L110.3 -274.0 L118.7 -270.0 L127.4 -266.0 L136.3 -262.0 L145.4 -258.0 L154.6 -254.0 L163.7 -250.0 L172.6 -246.0 L181.3 -242.0 L189.7 -238.0 L197.5 -234.0 L204.9 -230.0 L211.6 -226.0 L217.6 -222.0 L222.9 -218.0 L227.3 -214.0 L230.9 -210.0 L233.5 -206.0 L235.2 -202.0 L236.0 -198.0 L235.7 -194.0 L234.5 -190.0 L232.3 -186.0 L229.2 -182.0 L225.2 -178.0 L220.4 -174.0 L214.7 -170.0 L208.3 -166.0 L201.3 -162.0 L193.7 -158.0 L185.5 -154.0 L177.0 -150.0 L168.2 -146.0 L159.1 -142.0 L150.0 -138.0 L140.9 -134.0 L131.8 -130.0 L123.0 -126.0 L114.5 -122.0 L106.3 -118.0 L98.7 -114.0 L91.7 -110.0 L85.3 -106.0 L79.6 -102.0 L74.8 -98.0 L70.8 -94.0 L67.7 -90.0 L65.5 -86.0 L64.3 -82.0 L64.0 -78.0 L64.8 -74.0 L66.5 -70.0 L69.1 -66.0 L72.7 -62.0 L77.1 -58.0 L82.4 -54.0 L88.4 -50.0 L95.1 -46.0 L102.5 -42.0 L110.3 -38.0 L118.7 -34.0 L127.4 -30.0 L136.3 -26.0 L145.4 -22.0 L154.6 -18.0 L163.7 -14.0 L172.6 -10.0 L181.3 -6.0 L189.7 -2.0 L197.5 2.0 L204.9 6.0 L211.6 10.0 L217.6 14.0 L222.9 18.0 L227.3 22.0 L230.9 26.0 L233.5 30.0 L235.2 34.0 L236.0 38.0 L235.7 42.0 L234.5 46.0 L232.3 50.0 L229.2 54.0 L225.2 58.0 L220.4 62.0 L214.7 66.0 L208.3 70.0 L201.3 74.0 L193.7 78.0 L185.5 82.0 L177.0 86.0 L168.2 90.0 L159.1 94.0 L150.0 98.0 L140.9 102.0 L131.8 106.0 L123.0 110.0 L114.5 114.0 L106.3 118.0 L98.7 122.0 L91.7 126.0 L85.3 130.0 L79.6 134.0 L74.8 138.0 L70.8 142.0 L67.7 146.0 L65.5 150.0 L64.3 154.0 L64.0 158.0 L64.8 162.0 L66.5 166.0 L69.1 170.0 L72.7 174.0 L77.1 178.0 L82.4 182.0 L88.4 186.0 L95.5 190.0 L103.4 194.0 L111.9 198.0 L120.8 202.0 L129.6 206.0 L138.2 210.0 L146.2 214.0 L153.6 218.0 L160.0 222.0 L165.4 226.0 L169.6 230.0 L172.7 234.0 L174.7 238.0 L175.6 242.0 L175.5 246.0 L174.6 250.0 L172.9 254.0 L170.8 258.0 L168.3 262.0 L165.7 266.0 L163.2 270.0 L160.9 274.0 L158.9 278.0 L157.5 282.0 L156.7 286.0 L156.3 290.0" fill="none" stroke="#fff" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/></mask></defs><g mask="url(#qv)"><path d="M70.8 -330.0 L67.7 -326.0 L65.5 -322.0 L64.3 -318.0 L64.0 -314.0 L64.8 -310.0 L66.5 -306.0 L69.1 -302.0 L72.7 -298.0 L77.1 -294.0 L82.4 -290.0 L88.4 -286.0 L95.1 -282.0 L102.5 -278.0 L110.3 -274.0 L118.7 -270.0 L127.4 -266.0 L136.3 -262.0 L145.4 -258.0 L154.6 -254.0 L163.7 -250.0 L172.6 -246.0 L181.3 -242.0 L189.7 -238.0 L197.5 -234.0 L204.9 -230.0 L211.6 -226.0 L217.6 -222.0 L222.9 -218.0 L227.3 -214.0 L230.9 -210.0 L233.5 -206.0 L235.2 -202.0 L236.0 -198.0 L235.7 -194.0 L234.5 -190.0 L232.3 -186.0 L229.2 -182.0 L225.2 -178.0 L220.4 -174.0 L214.7 -170.0 L208.3 -166.0 L201.3 -162.0 L193.7 -158.0 L185.5 -154.0 L177.0 -150.0 L168.2 -146.0 L159.1 -142.0 L150.0 -138.0 L140.9 -134.0 L131.8 -130.0 L123.0 -126.0 L114.5 -122.0 L106.3 -118.0 L98.7 -114.0 L91.7 -110.0 L85.3 -106.0 L79.6 -102.0 L74.8 -98.0 L70.8 -94.0 L67.7 -90.0 L65.5 -86.0 L64.3 -82.0 L64.0 -78.0 L64.8 -74.0 L66.5 -70.0 L69.1 -66.0 L72.7 -62.0 L77.1 -58.0 L82.4 -54.0 L88.4 -50.0 L95.1 -46.0 L102.5 -42.0 L110.3 -38.0 L118.7 -34.0 L127.4 -30.0 L136.3 -26.0 L145.4 -22.0 L154.6 -18.0 L163.7 -14.0 L172.6 -10.0 L181.3 -6.0 L189.7 -2.0 L197.5 2.0 L204.9 6.0 L211.6 10.0 L217.6 14.0 L222.9 18.0 L227.3 22.0 L230.9 26.0 L233.5 30.0 L235.2 34.0 L236.0 38.0 L235.7 42.0 L234.5 46.0 L232.3 50.0 L229.2 54.0 L225.2 58.0 L220.4 62.0 L214.7 66.0 L208.3 70.0 L201.3 74.0 L193.7 78.0 L185.5 82.0 L177.0 86.0 L168.2 90.0 L159.1 94.0 L150.0 98.0 L140.9 102.0 L131.8 106.0 L123.0 110.0 L114.5 114.0 L106.3 118.0 L98.7 122.0 L91.7 126.0 L85.3 130.0 L79.6 134.0 L74.8 138.0 L70.8 142.0 L67.7 146.0 L65.5 150.0 L64.3 154.0 L64.0 158.0 L64.8 162.0 L66.5 166.0 L69.1 170.0 L72.7 174.0 L77.1 178.0 L82.4 182.0 L88.4 186.0 L95.5 190.0 L103.4 194.0 L111.9 198.0 L120.8 202.0 L129.6 206.0 L138.2 210.0 L146.2 214.0 L153.6 218.0 L160.0 222.0 L165.4 226.0 L169.6 230.0 L172.7 234.0 L174.7 238.0 L175.6 242.0 L175.5 246.0 L174.6 250.0 L172.9 254.0 L170.8 258.0 L168.3 262.0 L165.7 266.0 L163.2 270.0 L160.9 274.0 L158.9 278.0 L157.5 282.0 L156.7 286.0 L156.3 290.0" fill="none" stroke="#0b4a35" stroke-width="19" stroke-linecap="round" stroke-linejoin="round"/><path d="M70.8 -330.0 L67.7 -326.0 L65.5 -322.0 L64.3 -318.0 L64.0 -314.0 L64.8 -310.0 L66.5 -306.0 L69.1 -302.0 L72.7 -298.0 L77.1 -294.0 L82.4 -290.0 L88.4 -286.0 L95.1 -282.0 L102.5 -278.0 L110.3 -274.0 L118.7 -270.0 L127.4 -266.0 L136.3 -262.0 L145.4 -258.0 L154.6 -254.0 L163.7 -250.0 L172.6 -246.0 L181.3 -242.0 L189.7 -238.0 L197.5 -234.0 L204.9 -230.0 L211.6 -226.0 L217.6 -222.0 L222.9 -218.0 L227.3 -214.0 L230.9 -210.0 L233.5 -206.0 L235.2 -202.0 L236.0 -198.0 L235.7 -194.0 L234.5 -190.0 L232.3 -186.0 L229.2 -182.0 L225.2 -178.0 L220.4 -174.0 L214.7 -170.0 L208.3 -166.0 L201.3 -162.0 L193.7 -158.0 L185.5 -154.0 L177.0 -150.0 L168.2 -146.0 L159.1 -142.0 L150.0 -138.0 L140.9 -134.0 L131.8 -130.0 L123.0 -126.0 L114.5 -122.0 L106.3 -118.0 L98.7 -114.0 L91.7 -110.0 L85.3 -106.0 L79.6 -102.0 L74.8 -98.0 L70.8 -94.0 L67.7 -90.0 L65.5 -86.0 L64.3 -82.0 L64.0 -78.0 L64.8 -74.0 L66.5 -70.0 L69.1 -66.0 L72.7 -62.0 L77.1 -58.0 L82.4 -54.0 L88.4 -50.0 L95.1 -46.0 L102.5 -42.0 L110.3 -38.0 L118.7 -34.0 L127.4 -30.0 L136.3 -26.0 L145.4 -22.0 L154.6 -18.0 L163.7 -14.0 L172.6 -10.0 L181.3 -6.0 L189.7 -2.0 L197.5 2.0 L204.9 6.0 L211.6 10.0 L217.6 14.0 L222.9 18.0 L227.3 22.0 L230.9 26.0 L233.5 30.0 L235.2 34.0 L236.0 38.0 L235.7 42.0 L234.5 46.0 L232.3 50.0 L229.2 54.0 L225.2 58.0 L220.4 62.0 L214.7 66.0 L208.3 70.0 L201.3 74.0 L193.7 78.0 L185.5 82.0 L177.0 86.0 L168.2 90.0 L159.1 94.0 L150.0 98.0 L140.9 102.0 L131.8 106.0 L123.0 110.0 L114.5 114.0 L106.3 118.0 L98.7 122.0 L91.7 126.0 L85.3 130.0 L79.6 134.0 L74.8 138.0 L70.8 142.0 L67.7 146.0 L65.5 150.0 L64.3 154.0 L64.0 158.0 L64.8 162.0 L66.5 166.0 L69.1 170.0 L72.7 174.0 L77.1 178.0 L82.4 182.0 L88.4 186.0 L95.5 190.0 L103.4 194.0 L111.9 198.0 L120.8 202.0 L129.6 206.0 L138.2 210.0 L146.2 214.0 L153.6 218.0 L160.0 222.0 L165.4 226.0 L169.6 230.0 L172.7 234.0 L174.7 238.0 L175.6 242.0 L175.5 246.0 L174.6 250.0 L172.9 254.0 L170.8 258.0 L168.3 262.0 L165.7 266.0 L163.2 270.0 L160.9 274.0 L158.9 278.0 L157.5 282.0 L156.7 286.0 L156.3 290.0" fill="none" stroke="#27b783" stroke-width="13" stroke-dasharray="3.4 5.4" stroke-linejoin="round"/><path d="M70.8 -330.0 L67.7 -326.0 L65.5 -322.0 L64.3 -318.0 L64.0 -314.0 L64.8 -310.0 L66.5 -306.0 L69.1 -302.0 L72.7 -298.0 L77.1 -294.0 L82.4 -290.0 L88.4 -286.0 L95.1 -282.0 L102.5 -278.0 L110.3 -274.0 L118.7 -270.0 L127.4 -266.0 L136.3 -262.0 L145.4 -258.0 L154.6 -254.0 L163.7 -250.0 L172.6 -246.0 L181.3 -242.0 L189.7 -238.0 L197.5 -234.0 L204.9 -230.0 L211.6 -226.0 L217.6 -222.0 L222.9 -218.0 L227.3 -214.0 L230.9 -210.0 L233.5 -206.0 L235.2 -202.0 L236.0 -198.0 L235.7 -194.0 L234.5 -190.0 L232.3 -186.0 L229.2 -182.0 L225.2 -178.0 L220.4 -174.0 L214.7 -170.0 L208.3 -166.0 L201.3 -162.0 L193.7 -158.0 L185.5 -154.0 L177.0 -150.0 L168.2 -146.0 L159.1 -142.0 L150.0 -138.0 L140.9 -134.0 L131.8 -130.0 L123.0 -126.0 L114.5 -122.0 L106.3 -118.0 L98.7 -114.0 L91.7 -110.0 L85.3 -106.0 L79.6 -102.0 L74.8 -98.0 L70.8 -94.0 L67.7 -90.0 L65.5 -86.0 L64.3 -82.0 L64.0 -78.0 L64.8 -74.0 L66.5 -70.0 L69.1 -66.0 L72.7 -62.0 L77.1 -58.0 L82.4 -54.0 L88.4 -50.0 L95.1 -46.0 L102.5 -42.0 L110.3 -38.0 L118.7 -34.0 L127.4 -30.0 L136.3 -26.0 L145.4 -22.0 L154.6 -18.0 L163.7 -14.0 L172.6 -10.0 L181.3 -6.0 L189.7 -2.0 L197.5 2.0 L204.9 6.0 L211.6 10.0 L217.6 14.0 L222.9 18.0 L227.3 22.0 L230.9 26.0 L233.5 30.0 L235.2 34.0 L236.0 38.0 L235.7 42.0 L234.5 46.0 L232.3 50.0 L229.2 54.0 L225.2 58.0 L220.4 62.0 L214.7 66.0 L208.3 70.0 L201.3 74.0 L193.7 78.0 L185.5 82.0 L177.0 86.0 L168.2 90.0 L159.1 94.0 L150.0 98.0 L140.9 102.0 L131.8 106.0 L123.0 110.0 L114.5 114.0 L106.3 118.0 L98.7 122.0 L91.7 126.0 L85.3 130.0 L79.6 134.0 L74.8 138.0 L70.8 142.0 L67.7 146.0 L65.5 150.0 L64.3 154.0 L64.0 158.0 L64.8 162.0 L66.5 166.0 L69.1 170.0 L72.7 174.0 L77.1 178.0 L82.4 182.0 L88.4 186.0 L95.5 190.0 L103.4 194.0 L111.9 198.0 L120.8 202.0 L129.6 206.0 L138.2 210.0 L146.2 214.0 L153.6 218.0 L160.0 222.0 L165.4 226.0 L169.6 230.0 L172.7 234.0 L174.7 238.0 L175.6 242.0 L175.5 246.0 L174.6 250.0 L172.9 254.0 L170.8 258.0 L168.3 262.0 L165.7 266.0 L163.2 270.0 L160.9 274.0 L158.9 278.0 L157.5 282.0 L156.7 286.0 L156.3 290.0" fill="none" stroke="#e0b04e" stroke-width="1.7" stroke-dasharray="1 9" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/></g><g class="q-head"><g class="q-in"><path transform="rotate(-132)" d="M0 0 C6.0 -9.5 4.8 -24.5 0 -34.0 C-4.8 -24.5 -6.0 -9.5 0 0Z" fill="url(#gsp)"/><path transform="rotate(-112)" d="M0 0 C6.5 -11.2 5.2 -28.8 0 -40.0 C-5.2 -28.8 -6.5 -11.2 0 0Z" fill="url(#gcb)"/><path transform="rotate(-92)" d="M0 0 C7.0 -12.9 5.6 -33.1 0 -46.0 C-5.6 -33.1 -7.0 -12.9 0 0Z" fill="url(#gq2)"/><path transform="rotate(-72)" d="M0 0 C6.5 -11.2 5.2 -28.8 0 -40.0 C-5.2 -28.8 -6.5 -11.2 0 0Z" fill="url(#gq1)"/><path transform="rotate(-52)" d="M0 0 C6.0 -9.5 4.8 -24.5 0 -34.0 C-4.8 -24.5 -6.0 -9.5 0 0Z" fill="url(#gsp)"/><path d="M-6 -7C8 -13 28 -11 44 -2L42 2C27 0 10 0 -6 2Z" fill="#1c7f5c" stroke="#072b21" stroke-width=".8"/><path d="M-4 5C10 5 26 6 40 11C25 15 8 13 -4 10Z" fill="#138a5c" stroke="#072b21" stroke-width=".8"/><path d="M29 2L32 9L35 3Z M20 3L22.5 8L25 3.5Z" fill="#fff1b8"/><circle cx="13" cy="-5" r="2.6" fill="#f4cf6a"/><circle cx="13.6" cy="-5" r="1.1" fill="#072b21"/><path d="M36 -4.5h3" stroke="#072b21" stroke-width="1.2" stroke-linecap="round"/></g></g></svg><div class="corona-fan"></div></div>
+  <div class="corona band" aria-hidden="true"><div class="corona-fan"></div></div>
 
   <div class="greca band" aria-hidden="true"></div>
 
@@ -746,33 +748,17 @@
     var crown = document.querySelector(".corona");
     if (!tpl || !crown) return;
     crown.querySelector(".corona-fan").appendChild(tpl.content.cloneNode(true));
-    var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var win = crown.querySelector(".q-win"), head = crown.querySelector(".q-head");
-    var Lp = win ? win.getTotalLength() : 0, Sb = Lp * 0.55;
-    if (win) win.setAttribute("stroke-dasharray", Sb.toFixed(1) + " " + (Lp * 2).toFixed(1));
-    // Quetzalcóatl: la ventana de la serpiente recorre la trayectoria; la cabeza (con plumas) va al frente.
-    function serpent(d) {
-      if (!win) return;
-      var h = d * Lp;
-      win.setAttribute("stroke-dashoffset", (Sb - h).toFixed(1));
-      if (h <= 0) { head.setAttribute("opacity", "0"); return; }
-      var a = win.getPointAtLength(h), b = win.getPointAtLength(Math.max(0, h - 3));
-      var ang = Math.atan2(a.y - b.y, a.x - b.x) * 180 / Math.PI;
-      head.setAttribute("opacity", "1");
-      head.setAttribute("transform", "translate(" + a.x.toFixed(1) + " " + a.y.toFixed(1) + ") rotate(" + ang.toFixed(1) + ")");
-    }
-    if (reduce) { serpent(1); return; } // queda abierto y quieto (valores por defecto del CSS)
+    if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return; // queda abierto y quieto (valores por defecto del CSS)
 
     var ticking = false, last = "";
     function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
-    // Avance 0→1 mientras la sección "Trabajo" sube por la pantalla: Quetzalcóatl desciende por detrás, el penacho
-    // emerge de detrás de la sección y se abre fila por fila (quetzal, cotinga, espátula); al final aparece la diadema de oro.
+    // Avance 0→1 mientras la sección "Trabajo" sube por la pantalla: el penacho emerge de detrás de ella
+    // y se abre fila por fila (quetzal, cotinga, espátula); al final aparece la diadema de oro.
     function update() {
       ticking = false;
       var vh = window.innerHeight, r = crown.getBoundingClientRect();
       var p = clamp((vh * 0.95 - r.bottom) / (vh * 0.45));
-      var d = clamp((vh * 0.98 - r.top) / (vh * 0.62));
-      var key = p.toFixed(3) + "|" + d.toFixed(3);
+      var key = p.toFixed(3);
       if (key === last) return;
       last = key;
       var st = crown.style;
@@ -781,11 +767,56 @@
       st.setProperty("--u2", clamp((p - 0.35) / 0.5).toFixed(3));
       st.setProperty("--u3", clamp((p - 0.45) / 0.5).toFixed(3));
       st.setProperty("--b", clamp((p - 0.7) / 0.3).toFixed(3));
-      serpent(d);
     }
     function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
+    update();
+  })();
+</script>
+<script>
+  // Quetzalcóatl desciende por las secciones: la cabeza avanza por la pantalla con el scroll (de arriba al inicio a abajo
+  // al final) y el cuerpo sigue una curva anclada a la página, así que pasa por detrás del contenido de cada sección.
+  (function () {
+    var svg = document.querySelector(".quetzal");
+    if (!svg || (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) return;
+    var base = svg.querySelector(".q-base"), band = svg.querySelector(".q-band"), dots = svg.querySelector(".q-dots");
+    var head = svg.querySelector(".q-head"), body = [base, band, dots];
+    var ticking = false, lastKey = "";
+    function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+
+    function update() {
+      ticking = false;
+      var W = window.innerWidth, vh = window.innerHeight, sy = window.pageYOffset;
+      var docH = document.documentElement.scrollHeight;
+      var q = docH > vh ? clamp(sy / (docH - vh)) : 0;
+      var key = W + "|" + vh + "|" + sy.toFixed(0) + "|" + docH;
+      if (key === lastKey) return;
+      lastKey = key;
+
+      var narrow = W < 700, k = narrow ? 0.7 : Math.min(1, Math.max(0.8, W / 1280));
+      var A = W * (narrow ? 0.3 : 0.33), lam = narrow ? 340 : 480, cx = W / 2, step = 7;
+      var yh = sy + vh * (0.14 + 0.68 * q);          // posición de la cabeza en coordenadas de página
+      var n = Math.ceil(vh * 1.05 / step), d = "", x0, y0, x1, y1;
+      for (var i = 0; i <= n; i++) {
+        var Y = yh - i * step, x = cx + A * Math.sin(2 * Math.PI * Y / lam), y = Y - sy;
+        d += (i ? "L" : "M") + x.toFixed(1) + " " + y.toFixed(1);
+        if (i === 0) { x0 = x; y0 = y; } else if (i === 1) { x1 = x; y1 = y; }
+      }
+      for (var j = 0; j < 3; j++) body[j].setAttribute("d", d);
+      base.setAttribute("stroke-width", (19 * k).toFixed(1));
+      band.setAttribute("stroke-width", (13 * k).toFixed(1));
+      band.setAttribute("stroke-dasharray", (3.4 * k).toFixed(1) + " " + (5.4 * k).toFixed(1));
+      dots.setAttribute("stroke-width", (1.7 * k).toFixed(1));
+      dots.setAttribute("stroke-dasharray", (1 * k).toFixed(1) + " " + (9 * k).toFixed(1));
+      var ang = Math.atan2(y0 - y1, x0 - x1) * 180 / Math.PI;
+      head.setAttribute("opacity", "1");
+      head.setAttribute("transform", "translate(" + x0.toFixed(1) + " " + y0.toFixed(1) + ") rotate(" + ang.toFixed(1) + ") scale(" + (k * 1.05).toFixed(2) + ")");
+    }
+    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    window.addEventListener("load", onScroll);
     update();
   })();
 </script>
