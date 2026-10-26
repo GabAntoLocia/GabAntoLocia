@@ -31,9 +31,9 @@ Regla: rojo manda; verde, azul, oro y rosa aparecen en pequeñas dosis (líneas,
 ## Motivos mexicas
 | Motivo | Dónde | Reglas |
 |---|---|---|
-| **Penacho de plumas** (inspirado en el llamado "penacho de Moctezuma", Weltmuseum Wien): abanico de plumas de quetzal, hilera azul de cotinga, hilera rosa de espátula y diadema de oro | Hero (`.penacho`), sobre la piedra del sol | Ilustración propia y estilizada en SVG; opacidad .62 (.42 en móvil), se desvanece hacia el texto; brillo iridiscente (`hue-rotate` ±10°, 11 s) |
+| **Penacho de plumas** (inspirado en el llamado "penacho de Moctezuma", Weltmuseum Wien): abanico de plumas de quetzal, hilera azul de cotinga, hilera rosa de espátula y diadema de oro | Hero (`.penacho`), sobre la piedra del sol | Ilustración propia y estilizada en SVG; opacidad .36 (.24 en móvil), colores apagados, se desvanece hacia el texto; brillo iridiscente muy leve (`hue-rotate` ±5°, 11 s) |
 | **Piedra del sol** (anillos, 20 signos del tonalpohualli, 8 rayos) | Fondo del hero (`.sol`) | Opacidad ≈ .1, gira 1 vuelta cada 6 min, `aria-hidden` |
-| **Línea iridiscente** | Borde inferior de la cabecera | Degradado quetzal → cotinga → oro → espátula, 1 px |
+| **Línea iridiscente** | Borde inferior de la cabecera | Degradado quetzal → cotinga → oro → espátula, 1 px, opacidad .45 |
 | **Greca xicalcoliuhqui** | Frisos `.greca` entre secciones | Opacidad .5, desvanecida en los bordes |
 | **Numeración de puntos** (los mexicas contaban con puntos) | Número de cada proyecto (`.dots`) | 1–5 puntos cempasúchil; se encienden con el foco |
 | **Rombo** | Separador de la marca ANTAÑO◆LOCIA | Rojo, 7 px |
