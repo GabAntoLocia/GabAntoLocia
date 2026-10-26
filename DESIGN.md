@@ -20,9 +20,9 @@ Landing estática de un solo archivo (`index.html`). Esta guía fija las reglas 
 | `--espatula` | `#e0526a` | **Rosa espátula** (plumas rosa-rojo); junto a `--red` cierra la gama cálida |
 | `--greca` | SVG en data URI | Friso xicalcoliuhqui |
 
-**Paleta del penacho:** verde quetzal, azul cotinga, oro y rosa espátula, siempre en este orden cuando se reparten por elementos (línea de la cabecera, etiquetas del Enfoque, borde de cada chip del Stack). El rojo grana sigue siendo el acento dominante.
+**Paleta inspirada en el penacho de plumas de Moctezuma** (solo los colores, sin dibujo del penacho): verde quetzal, azul cotinga, oro y rosa espátula, siempre en este orden cuando se reparten por elementos (línea de la cabecera, etiquetas del Enfoque, borde de cada chip del Stack). El rojo grana sigue siendo el acento dominante.
 
-Regla: rojo manda; verde, azul, oro y rosa aparecen en pequeñas dosis (líneas, bordes, puntos, brillos de fondo ≤ 10 %), nunca como bloques planos. La única zona de color pleno es el penacho del hero.
+Regla: rojo manda; verde, azul, oro y rosa aparecen en pequeñas dosis (líneas, bordes, puntos, brillos de fondo ≤ 10 %), nunca como bloques planos.
 
 ## Tipografía
 - Display: **Anton** (caps condensadas) para títulos y masthead.
@@ -31,19 +31,18 @@ Regla: rojo manda; verde, azul, oro y rosa aparecen en pequeñas dosis (líneas,
 ## Motivos mexicas
 | Motivo | Dónde | Reglas |
 |---|---|---|
-| **Penacho de plumas** (inspirado en el llamado "penacho de Moctezuma", Weltmuseum Wien): abanico de plumas de quetzal, hilera azul de cotinga, hilera rosa de espátula y diadema de oro | Hero (`.penacho`), sobre la piedra del sol | Ilustración propia y estilizada en SVG; opacidad .36 (.24 en móvil), colores apagados, se desvanece hacia el texto; brillo iridiscente muy leve (`hue-rotate` ±5°, 11 s) |
 | **Piedra del sol** (anillos, 20 signos del tonalpohualli, 8 rayos) | Fondo del hero (`.sol`) | Opacidad ≈ .1, gira 1 vuelta cada 6 min, `aria-hidden` |
 | **Línea iridiscente** | Borde inferior de la cabecera | Degradado quetzal → cotinga → oro → espátula, 1 px, opacidad .45 |
 | **Greca xicalcoliuhqui** | Frisos `.greca` entre secciones | Opacidad .5, desvanecida en los bordes |
 | **Numeración de puntos** (los mexicas contaban con puntos) | Número de cada proyecto (`.dots`) | 1–5 puntos cempasúchil; se encienden con el foco |
 | **Rombo** | Separador de la marca ANTAÑO◆LOCIA | Rojo, 7 px |
-| **Favicon** | Mini abanico de plumas con diadema de oro | Mismos colores del penacho |
+| **Favicon** | Mini abanico de plumas con diadema de oro | Colores de la paleta |
 | **Náhuatl** | Pie: "Tlazohcamati" (gracias) | Mono pequeño en cempasúchil; traducido en EN |
 
 ## Movimiento
 - **Foco al hacer scroll:** el hito más cercano al centro (proyectos y trayectoria) se ilumina; el resto se atenúa.
 - **Stack:** etiquetas que flotan, rebotan y huyen del cursor; solo corren con la sección visible.
-- **Iridiscencia del penacho** y giro de la piedra del sol.
+- Giro lento de la piedra del sol.
 - Todo se desactiva con `prefers-reduced-motion` y sin JavaScript la página queda completa y estática.
 
 ## Idioma
