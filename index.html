@@ -776,12 +776,12 @@
 </script>
 <script>
   // Quetzalcóatl nace del penacho cuando éste queda completo, entra a la sección "Trabajo" y se desvanece al llegar a su
-  // contenido (para no distraer en Trabajo y Trayectoria); vuelve a salir al comenzar "Enfoque" y baja hasta el final.
+  // contenido (para no distraer en Trabajo y Trayectoria); vuelve a salir al comenzar "Enfoque", se oculta de nuevo en "Stack" y baja hasta el final.
   // La cabeza se mueve con el scroll; el cuerpo sigue una curva anclada a la página, con la cola en su punto de origen.
   (function () {
     var svg = document.querySelector(".quetzal"), crown = document.querySelector(".corona");
     if (!svg || !crown || (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) return;
-    var work = document.getElementById("trabajo"), enf = document.getElementById("enfoque");
+    var work = document.getElementById("trabajo"), enf = document.getElementById("enfoque"), stack = document.getElementById("stack");
     var base = svg.querySelector(".q-base"), band = svg.querySelector(".q-band"), dots = svg.querySelector(".q-dots");
     var head = svg.querySelector(".q-head"), body = [base, band, dots], fade = svg.querySelector("#qfade");
     var ticking = false, lastKey = "";
@@ -812,6 +812,9 @@
       else {
         yh = Yx + (sy - sx) * g3; Yo = Yx;
         alpha = clamp((yh - Yx) / 100);
+        // En "Stack" también se oculta (con desvanecido) para dejar leer las etiquetas.
+        var sr = stack.getBoundingClientRect();
+        alpha *= 1 - clamp(Math.min(vh * 0.7 - sr.top, sr.bottom - vh * 0.3) / 120);   // franja de lectura: 30 %–70 % de la pantalla
       }
       svg.style.opacity = (0.3 * alpha).toFixed(3);
 
