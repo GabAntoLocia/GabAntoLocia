@@ -2,7 +2,31 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<script>document.documentElement.classList.add("js")</script>
+<script>
+  // Idioma inicial: elección guardada > ?lang= > idioma del sistema/navegador > región por zona horaria.
+  (function () {
+    var d = document.documentElement, lang = null;
+    d.classList.add("js");
+    try { lang = localStorage.getItem("lang"); } catch (e) {}
+    var q = /[?&]lang=(es|en)\b/.exec(location.search);
+    if (q) lang = q[1];
+    if (lang !== "es" && lang !== "en") {
+      lang = null;
+      var prefs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ""];
+      for (var i = 0; i < prefs.length && !lang; i++) {
+        var base = String(prefs[i]).toLowerCase().slice(0, 2);
+        if (base === "es" || base === "en") lang = base;
+      }
+    }
+    if (!lang) {
+      var tz = "";
+      try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (e) {}
+      var hisp = /^(Europe\/Madrid|Atlantic\/Canary|Africa\/Ceuta|America\/(Mexico_City|Cancun|Merida|Monterrey|Matamoros|Chihuahua|Ciudad_Juarez|Ojinaga|Mazatlan|Bahia_Banderas|Hermosillo|Tijuana|Guatemala|Belize|El_Salvador|Tegucigalpa|Managua|Costa_Rica|Panama|Havana|Santo_Domingo|Puerto_Rico|Bogota|Caracas|Lima|Guayaquil|La_Paz|Santiago|Punta_Arenas|Asuncion|Montevideo|Argentina\/.+|Buenos_Aires|Cordoba|Mendoza))$/;
+      lang = hisp.test(tz) ? "es" : "en";
+    }
+    d.lang = lang;
+  })();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#09090b">
 <title>Gabriel Antaño Locia — Full-Stack Engineer</title>
@@ -149,21 +173,33 @@
   .job{position:relative}
   .job.is-focus{box-shadow:inset 3px 0 0 var(--red);background:color-mix(in srgb,var(--red) 4%,transparent)}
   .job.is-focus h3{color:#fff}
+  .top-r{display:flex;align-items:center;gap:12px}
+  .lang{display:inline-flex;border:1px solid var(--line);font-family:var(--mono);font-size:11px;letter-spacing:.14em}
+  .lang button{appearance:none;background:none;border:0;color:var(--muted);font:inherit;letter-spacing:inherit;padding:7px 10px;min-height:32px;cursor:pointer;transition:color .18s,background .18s}
+  .lang button:hover{color:var(--ink)}
+  .lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+  @media(max-width:520px){.status{display:none}}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<a href="#trabajo" class="skip">Saltar al contenido</a>
+<a href="#trabajo" class="skip" data-i18n="t0">Saltar al contenido</a>
 <header class="top band">
   <div class="wrap">
     <div class="brand">ANTAÑO<b>·</b>LOCIA</div>
-    <nav class="links" aria-label="Secciones">
-      <a href="#trabajo">Trabajo</a>
-      <a href="#trayectoria">Trayectoria</a>
+    <nav class="links" aria-label="Secciones" data-i18n-aria="Sections">
+      <a href="#trabajo" data-i18n="t1">Trabajo</a>
+      <a href="#trayectoria" data-i18n="t2">Trayectoria</a>
       <a href="#stack">Stack</a>
-      <a href="#contacto">Contacto</a>
+      <a href="#contacto" data-i18n="t3">Contacto</a>
     </nav>
-    <span class="status"><span class="dot" aria-hidden="true"></span>Disponible · Remoto</span>
+    <div class="top-r">
+      <span class="status" data-i18n="t4"><span class="dot" aria-hidden="true"></span>Disponible · Remoto</span>
+      <div class="lang" role="group" aria-label="Idioma / Language">
+        <button type="button" data-lang="es" lang="es" aria-pressed="true">ES</button>
+        <button type="button" data-lang="en" lang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -171,11 +207,11 @@
   <section class="hero band">
     <div class="wrap">
       <span class="eyebrow">Gabriel Antaño Locia — Full-Stack Engineer (Backend-leaning)</span>
-      <h1 class="masthead">Software<br>que <span class="red">aguanta</span><br>producción.</h1>
-      <p class="lede">+4 años construyendo backend con <b>Node.js, TypeScript y Python.</b> Clean Architecture, arquitectura hexagonal y DDD. PostgreSQL · AWS · integración de LLMs (RAG, LangChain).</p>
+      <h1 class="masthead" data-i18n="t5">Software<br>que <span class="red">aguanta</span><br>producción.</h1>
+      <p class="lede" data-i18n="t6">+4 años construyendo backend con <b>Node.js, TypeScript y Python.</b> Clean Architecture, arquitectura hexagonal y DDD. PostgreSQL · AWS · integración de LLMs (RAG, LangChain).</p>
       <div class="cta-row">
-        <a class="btn primary" href="#trabajo">Ver proyectos</a>
-        <a class="btn ghost" href="#contacto">Contacto</a>
+        <a class="btn primary" href="#trabajo" data-i18n="t7">Ver proyectos</a>
+        <a class="btn ghost" href="#contacto" data-i18n="t3">Contacto</a>
       </div>
     </div>
   </section>
@@ -183,8 +219,8 @@
   <section class="work band" id="trabajo">
     <div class="wrap">
       <div class="sec-head">
-        <h2>Trabajo seleccionado</h2>
-        <span class="count">05 · CÓDIGO + CASOS</span>
+        <h2 data-i18n="t8">Trabajo seleccionado</h2>
+        <span class="count" data-i18n="t9">05 · CÓDIGO + CASOS</span>
       </div>
 
       <article class="rec">
@@ -192,59 +228,59 @@
         <div>
           <h3>Backend Patterns Showcase</h3>
           <div class="slug">backend-patterns-showcase · open source</div>
-          <p class="what">Servicio de referencia que escribí desde cero para demostrar patrones de backend senior, listo para correr sin servicios externos (adaptadores in-memory detrás de puertos).</p>
-          <p class="note">Arquitectura hexagonal, webhook con firma HMAC (fail-closed + anti-replay), cola idempotente con lease y reintentos, y auth con magic link. 51 tests (Vitest), CI en GitHub Actions y Docker.</p>
+          <p class="what" data-i18n="t10">Servicio de referencia que escribí desde cero para demostrar patrones de backend senior, listo para correr sin servicios externos (adaptadores in-memory detrás de puertos).</p>
+          <p class="note" data-i18n="t11">Arquitectura hexagonal, webhook con firma HMAC (fail-closed + anti-replay), cola idempotente con lease y reintentos, y auth con magic link. 51 tests (Vitest), CI en GitHub Actions y Docker.</p>
           <div class="tags"><span class="tag">TypeScript</span><span class="tag">Node.js</span><span class="tag">Hexagonal</span><span class="tag">HMAC</span><span class="tag">Vitest</span><span class="tag">Docker</span></div>
         </div>
-        <div class="go"><a class="live" href="https://github.com/GabAntoLocia/backend-patterns-showcase">Código →</a></div>
+        <div class="go"><a class="live" href="https://github.com/GabAntoLocia/backend-patterns-showcase" data-i18n="t12">Código →</a></div>
       </article>
 
       <article class="rec">
         <div class="num">02</div>
         <div>
-          <h3>Generador de Cotizaciones</h3>
-          <div class="slug">quote-generator · caso de estudio</div>
-          <p class="what">Servicio HTTP que cotiza en tiempo real desde el webhook de un formulario: valida dirección, resuelve zona, aplica pricing y entrega la cotización bilingüe (FR/EN) por correo y SMS, con aprobación en Slack.</p>
-          <p class="note">Respuesta inmediata + pipeline en background, colas durables e idempotencia con lease, cachés de geocoding, ~100 archivos de pruebas, Docker y GitHub Actions.</p>
+          <h3 data-i18n="t13">Generador de Cotizaciones</h3>
+          <div class="slug" data-i18n="t14">quote-generator · caso de estudio</div>
+          <p class="what" data-i18n="t15">Servicio HTTP que cotiza en tiempo real desde el webhook de un formulario: valida dirección, resuelve zona, aplica pricing y entrega la cotización bilingüe (FR/EN) por correo y SMS, con aprobación en Slack.</p>
+          <p class="note" data-i18n="t16">Respuesta inmediata + pipeline en background, colas durables e idempotencia con lease, cachés de geocoding, ~100 archivos de pruebas, Docker y GitHub Actions.</p>
           <div class="tags"><span class="tag">Node.js</span><span class="tag">TypeScript</span><span class="tag">Express</span><span class="tag">PostgreSQL</span><span class="tag">Docker</span></div>
         </div>
-        <div class="go"><span class="case">Caso de estudio</span></div>
+        <div class="go"><span class="case" data-i18n="t17">Caso de estudio</span></div>
       </article>
 
       <article class="rec">
         <div class="num">03</div>
         <div>
-          <h3>Tablero de Reclutamiento</h3>
-          <div class="slug">recruitment-portal · caso de estudio</div>
-          <p class="what">Tablero kanban para reclutar personal: ingesta por webhook, calificación determinista con reglas ponderadas y un agendador por enlace público con integración a Google Calendar.</p>
-          <p class="note">Arquitectura hexagonal, webhook con firma HMAC (fail-closed), recordatorios por cron y auth de equipo con revalidación en vivo. +50 archivos de pruebas (Vitest).</p>
+          <h3 data-i18n="t18">Tablero de Reclutamiento</h3>
+          <div class="slug" data-i18n="t19">recruitment-portal · caso de estudio</div>
+          <p class="what" data-i18n="t20">Tablero kanban para reclutar personal: ingesta por webhook, calificación determinista con reglas ponderadas y un agendador por enlace público con integración a Google Calendar.</p>
+          <p class="note" data-i18n="t21">Arquitectura hexagonal, webhook con firma HMAC (fail-closed), recordatorios por cron y auth de equipo con revalidación en vivo. +50 archivos de pruebas (Vitest).</p>
           <div class="tags"><span class="tag">Next.js 14</span><span class="tag">TypeScript</span><span class="tag">PostgreSQL</span><span class="tag">Hexagonal</span><span class="tag">Vitest</span></div>
         </div>
-        <div class="go"><span class="case">Caso de estudio</span></div>
+        <div class="go"><span class="case" data-i18n="t17">Caso de estudio</span></div>
       </article>
 
       <article class="rec">
         <div class="num">04</div>
         <div>
-          <h3>Portal de Clientes</h3>
-          <div class="slug">customer-portal · caso de estudio</div>
-          <p class="what">Autoservicio para clientes: ven sus próximos servicios, consultan facturas con link de pago y envían solicitudes (reagenda/cancelación) a una cola de aprobación con avisos a Slack.</p>
-          <p class="note">Login sin contraseña (magic link) y acceso a datos aislado por cliente: el identificador sale siempre de la sesión — anti-IDOR, fail-closed.</p>
+          <h3 data-i18n="t22">Portal de Clientes</h3>
+          <div class="slug" data-i18n="t23">customer-portal · caso de estudio</div>
+          <p class="what" data-i18n="t24">Autoservicio para clientes: ven sus próximos servicios, consultan facturas con link de pago y envían solicitudes (reagenda/cancelación) a una cola de aprobación con avisos a Slack.</p>
+          <p class="note" data-i18n="t25">Login sin contraseña (magic link) y acceso a datos aislado por cliente: el identificador sale siempre de la sesión — anti-IDOR, fail-closed.</p>
           <div class="tags"><span class="tag">Next.js 14</span><span class="tag">TypeScript</span><span class="tag">PostgreSQL</span><span class="tag">Tailwind</span><span class="tag">i18n</span></div>
         </div>
-        <div class="go"><span class="case">Caso de estudio</span></div>
+        <div class="go"><span class="case" data-i18n="t17">Caso de estudio</span></div>
       </article>
 
       <article class="rec">
         <div class="num">05</div>
         <div>
-          <h3>Detección de Dengue</h3>
+          <h3 data-i18n="t26">Detección de Dengue</h3>
           <div class="slug">dengue-detection-api · Python</div>
-          <p class="what">API que ingiere y procesa audios de mosquitos y hace búsqueda semántica de patrones con bases de datos vectoriales para apoyar la detección temprana.</p>
-          <p class="note">Python / FastAPI, embeddings y vector search (Pinecone / OpenSearch). Proyecto de I+D que combina audio, ML e infraestructura de datos.</p>
+          <p class="what" data-i18n="t27">API que ingiere y procesa audios de mosquitos y hace búsqueda semántica de patrones con bases de datos vectoriales para apoyar la detección temprana.</p>
+          <p class="note" data-i18n="t28">Python / FastAPI, embeddings y vector search (Pinecone / OpenSearch). Proyecto de I+D que combina audio, ML e infraestructura de datos.</p>
           <div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Vector DB</span><span class="tag">RAG</span><span class="tag">ML</span></div>
         </div>
-        <div class="go"><span class="case">Caso de estudio</span></div>
+        <div class="go"><span class="case" data-i18n="t17">Caso de estudio</span></div>
       </article>
     </div>
   </section>
@@ -252,31 +288,31 @@
   <section class="cv band" id="trayectoria">
     <div class="wrap">
       <div class="sec-head">
-        <h2>Trayectoria</h2>
-        <span class="count">+4 AÑOS · REMOTO</span>
+        <h2 data-i18n="t2">Trayectoria</h2>
+        <span class="count" data-i18n="t29">+4 AÑOS · REMOTO</span>
       </div>
       <div class="tl">
         <div class="job">
           <div class="when">Sep 2025 — Oct 2026<b>Full-Stack Engineer</b></div>
           <div>
-            <h3>Plataforma de servicios</h3>
-            <div class="org">Remoto · Node.js · TypeScript · Next.js · PostgreSQL/Supabase</div>
+            <h3 data-i18n="t30">Plataforma de servicios</h3>
+            <div class="org" data-i18n="t31">Remoto · Node.js · TypeScript · Next.js · PostgreSQL/Supabase</div>
             <ul>
-              <li>Construí <b>tres sistemas en producción</b>: cotizador automático, portal de clientes y tablero de reclutamiento.</li>
-              <li>Colas durables, workers e <b>idempotencia</b>; cerca de 100 archivos de pruebas; despliegue con Docker y GitHub Actions.</li>
-              <li><b>Spec-driven development con Claude Code</b>: agentes especializados (producto, arquitectura, backend, frontend, QA, revisión) y una especificación por feature.</li>
+              <li data-i18n="t32">Construí <b>tres sistemas en producción</b>: cotizador automático, portal de clientes y tablero de reclutamiento.</li>
+              <li data-i18n="t33">Colas durables, workers e <b>idempotencia</b>; cerca de 100 archivos de pruebas; despliegue con Docker y GitHub Actions.</li>
+              <li data-i18n="t34"><b>Spec-driven development con Claude Code</b>: agentes especializados (producto, arquitectura, backend, frontend, QA, revisión) y una especificación por feature.</li>
             </ul>
           </div>
         </div>
         <div class="job">
-          <div class="when">Feb 2025 — Ene 2026<b>Full-Stack Engineer</b></div>
+          <div class="when" data-i18n="t35">Feb 2025 — Ene 2026<b>Full-Stack Engineer</b></div>
           <div>
             <h3>The Rocketcode</h3>
-            <div class="org">Remoto · Next.js · Node.js · Python/FastAPI</div>
+            <div class="org" data-i18n="t36">Remoto · Next.js · Node.js · Python/FastAPI</div>
             <ul>
-              <li>Aplicaciones web con <b>Clean Architecture y DDD</b>; APIs REST y GraphQL.</li>
-              <li>Backend en Python/FastAPI para <b>extracción y conciliación de pólizas de seguro</b>, automatizando validación de datos.</li>
-              <li>Code reviews y gestión de PRs en GitHub.</li>
+              <li data-i18n="t37">Aplicaciones web con <b>Clean Architecture y DDD</b>; APIs REST y GraphQL.</li>
+              <li data-i18n="t38">Backend en Python/FastAPI para <b>extracción y conciliación de pólizas de seguro</b>, automatizando validación de datos.</li>
+              <li data-i18n="t39">Code reviews y gestión de PRs en GitHub.</li>
             </ul>
           </div>
         </div>
@@ -286,9 +322,9 @@
             <h3>iVentas / Mobieffects</h3>
             <div class="org">Node.js · React · Python · REST/GraphQL</div>
             <ul>
-              <li>Aplicaciones web con Node.js y React, integración con HubSpot, despliegues con Git y Docker.</li>
-              <li>Servicios backend en Python para un repositorio de <b>chatbots</b> (flujos conversacionales y mensajería).</li>
-              <li>Testing y monitoreo de <b>LLMs</b> (OpenAI) para automatización de citas.</li>
+              <li data-i18n="t40">Aplicaciones web con Node.js y React, integración con HubSpot, despliegues con Git y Docker.</li>
+              <li data-i18n="t41">Servicios backend en Python para un repositorio de <b>chatbots</b> (flujos conversacionales y mensajería).</li>
+              <li data-i18n="t42">Testing y monitoreo de <b>LLMs</b> (OpenAI) para automatización de citas.</li>
             </ul>
           </div>
         </div>
@@ -299,14 +335,14 @@
   <section class="approach band" id="enfoque">
     <div class="wrap">
       <div class="sec-head">
-        <h2>Enfoque</h2>
-        <span class="count">CÓMO TRABAJO</span>
+        <h2 data-i18n="t43">Enfoque</h2>
+        <span class="count" data-i18n="t44">CÓMO TRABAJO</span>
       </div>
       <div class="grid4">
-        <div class="cell"><div class="k">01 · Arquitectura</div><h3>Capas limpias</h3><p>Clean Architecture, hexagonal y DDD con criterio: dominio puro, casos de uso e infraestructura intercambiable. Sin sobre-ingeniería.</p></div>
-        <div class="cell"><div class="k">02 · APIs &amp; Datos</div><h3>Predecible y rápido</h3><p>REST y GraphQL consistentes, validación estricta, Postgres con pooling, colas durables e idempotencia.</p></div>
-        <div class="cell"><div class="k">03 · Seguridad</div><h3>Por defecto</h3><p>Firma HMAC en webhooks, sesiones JWT, acceso server-side y aislamiento por usuario (fail-closed).</p></div>
-        <div class="cell"><div class="k">04 · IA &amp; LLMs</div><h3>Aplicada</h3><p>RAG, LangChain y OpenAI; spec-driven development con Claude Code y agentes especializados por rol.</p></div>
+        <div class="cell"><div class="k" data-i18n="t45">01 · Arquitectura</div><h3 data-i18n="t46">Capas limpias</h3><p data-i18n="t47">Clean Architecture, hexagonal y DDD con criterio: dominio puro, casos de uso e infraestructura intercambiable. Sin sobre-ingeniería.</p></div>
+        <div class="cell"><div class="k" data-i18n="t48">02 · APIs &amp; Datos</div><h3 data-i18n="t49">Predecible y rápido</h3><p data-i18n="t50">REST y GraphQL consistentes, validación estricta, Postgres con pooling, colas durables e idempotencia.</p></div>
+        <div class="cell"><div class="k" data-i18n="t51">03 · Seguridad</div><h3 data-i18n="t52">Por defecto</h3><p data-i18n="t53">Firma HMAC en webhooks, sesiones JWT, acceso server-side y aislamiento por usuario (fail-closed).</p></div>
+        <div class="cell"><div class="k" data-i18n="t54">04 · IA &amp; LLMs</div><h3 data-i18n="t55">Aplicada</h3><p data-i18n="t56">RAG, LangChain y OpenAI; spec-driven development con Claude Code y agentes especializados por rol.</p></div>
       </div>
     </div>
   </section>
@@ -315,7 +351,7 @@
     <div class="wrap">
       <div class="sec-head">
         <h2>Stack</h2>
-        <span class="count">HERRAMIENTAS</span>
+        <span class="count" data-i18n="t57">HERRAMIENTAS</span>
       </div>
       <div class="chips">
         <span class="chip">TypeScript</span><span class="chip">JavaScript</span><span class="chip">Node.js</span>
@@ -326,19 +362,19 @@
         <span class="chip">Clean Architecture</span><span class="chip">DDD</span><span class="chip">Vitest · Jest</span>
       </div>
       <div class="edu">
-        <span><span class="mono">FORMACIÓN</span> &nbsp;Ingeniero en Computación — Universidad Autónoma de Guerrero (2021)</span>
-        <span><span class="mono">CERT</span> &nbsp;AWS Solutions Architect – Associate · curso oficial (2024)</span>
-        <span><span class="mono">IDIOMAS</span> &nbsp;Español nativo · Inglés básico–intermedio</span>
+        <span data-i18n="t58"><span class="mono">FORMACIÓN</span> &nbsp;Ingeniero en Computación — Universidad Autónoma de Guerrero (2021)</span>
+        <span data-i18n="t59"><span class="mono">CERT</span> &nbsp;AWS Solutions Architect – Associate · curso oficial (2024)</span>
+        <span data-i18n="t60"><span class="mono">IDIOMAS</span> &nbsp;Español nativo · Inglés básico–intermedio</span>
       </div>
     </div>
   </section>
 
   <section class="contact band" id="contacto">
     <div class="wrap">
-      <h2>Construyamos<br>algo sólido.</h2>
-      <p>¿Tienes un sistema que tiene que funcionar de verdad? Hablemos.</p>
+      <h2 data-i18n="t61">Construyamos<br>algo sólido.</h2>
+      <p data-i18n="t62">¿Tienes un sistema que tiene que funcionar de verdad? Hablemos.</p>
       <div class="reach">
-        <div class="row"><span class="lab">Correo</span><a class="val" href="mailto:locciaa1@gmail.com" data-link="email">locciaa1@gmail.com</a></div>
+        <div class="row"><span class="lab" data-i18n="t63">Correo</span><a class="val" href="mailto:locciaa1@gmail.com" data-link="email">locciaa1@gmail.com</a></div>
         <div class="row"><span class="lab">GitHub</span><a class="val" href="https://github.com/GabAntoLocia" data-link="github">github.com/GabAntoLocia</a></div>
         <div class="row"><span class="lab">Open source</span><a class="val" href="https://github.com/GabAntoLocia/backend-patterns-showcase">backend-patterns-showcase</a></div>
         <div class="row"><span class="lab">LinkedIn</span><span class="val">Gabriel Antaño Locia</span></div>
@@ -350,11 +386,115 @@
 <footer class="foot band">
   <div class="wrap">
     <span class="brand" style="font-size:19px">ANTAÑO<b>·</b>LOCIA</span>
-    <span class="mono">© 2026 · Gabriel Antaño Locia · Portafolio</span>
-    <span class="mono" style="color:var(--chrome)">Remoto · México</span>
+    <span class="mono" data-i18n="t64">© 2026 · Gabriel Antaño Locia · Portafolio</span>
+    <span class="mono" style="color:var(--chrome)" data-i18n="t65">Remoto · México</span>
   </div>
 </footer>
 
+<script>
+  (function () {
+    var EN = {
+      "t0": "Skip to content",
+      "t1": "Work",
+      "t2": "Experience",
+      "t3": "Contact",
+      "t4": "<span class=\"dot\" aria-hidden=\"true\"><\/span>Available · Remote",
+      "t5": "Software<br>that <span class=\"red\">survives<\/span><br>production.",
+      "t6": "4+ years building backends with <b>Node.js, TypeScript and Python.<\/b> Clean Architecture, hexagonal architecture and DDD. PostgreSQL · AWS · LLM integration (RAG, LangChain).",
+      "t7": "See projects",
+      "t8": "Selected work",
+      "t9": "05 · CODE + CASE STUDIES",
+      "t10": "A reference service I wrote from scratch to demonstrate senior backend patterns. It runs with no external services (in-memory adapters behind ports).",
+      "t11": "Hexagonal architecture, HMAC-signed webhook (fail-closed + anti-replay), idempotent queue with leases and retries, and magic-link auth. 51 tests (Vitest), GitHub Actions CI and Docker.",
+      "t12": "Code →",
+      "t13": "Quote Generator",
+      "t14": "quote-generator · case study",
+      "t15": "HTTP service that quotes in real time from a form webhook: it validates the address, resolves the zone, applies pricing and delivers a bilingual (FR/EN) quote by email and SMS, with approval in Slack.",
+      "t16": "Immediate response + background pipeline, durable queues and lease-based idempotency, geocoding caches, ~100 test files, Docker and GitHub Actions.",
+      "t17": "Case study",
+      "t18": "Recruitment Board",
+      "t19": "recruitment-portal · case study",
+      "t20": "Kanban board for hiring: webhook intake, deterministic scoring with weighted rules and a public-link scheduler integrated with Google Calendar.",
+      "t21": "Hexagonal architecture, HMAC-signed webhook (fail-closed), cron reminders and team auth with live revalidation. 50+ test files (Vitest).",
+      "t22": "Customer Portal",
+      "t23": "customer-portal · case study",
+      "t24": "Customer self-service: clients see upcoming services, check invoices with a payment link and send requests (reschedule/cancel) to an approval queue with Slack notifications.",
+      "t25": "Passwordless login (magic link) and per-customer data isolation: the identifier always comes from the session — anti-IDOR, fail-closed.",
+      "t26": "Dengue Detection",
+      "t27": "API that ingests and processes mosquito audio and runs semantic pattern search over vector databases to support early detection.",
+      "t28": "Python / FastAPI, embeddings and vector search (Pinecone / OpenSearch). An R&amp;D project combining audio, ML and data infrastructure.",
+      "t29": "4+ YEARS · REMOTE",
+      "t30": "Services platform",
+      "t31": "Remote · Node.js · TypeScript · Next.js · PostgreSQL/Supabase",
+      "t32": "Built <b>three production systems<\/b>: an automated quoting engine, a customer portal and a recruitment board.",
+      "t33": "Durable queues, workers and <b>idempotency<\/b>; nearly 100 test files; deployment with Docker and GitHub Actions.",
+      "t34": "<b>Spec-driven development with Claude Code<\/b>: specialized agents (product, architecture, backend, frontend, QA, review) and one spec per feature.",
+      "t35": "Feb 2025 — Jan 2026<b>Full-Stack Engineer<\/b>",
+      "t36": "Remote · Next.js · Node.js · Python/FastAPI",
+      "t37": "Web applications with <b>Clean Architecture and DDD<\/b>; REST and GraphQL APIs.",
+      "t38": "Python/FastAPI backend for <b>insurance policy extraction and reconciliation<\/b>, automating data validation.",
+      "t39": "Code reviews and PR management on GitHub.",
+      "t40": "Web applications with Node.js and React, HubSpot integration, deployments with Git and Docker.",
+      "t41": "Python backend services for a <b>chatbot<\/b> repository (conversational flows and messaging).",
+      "t42": "Testing and monitoring of <b>LLMs<\/b> (OpenAI) for appointment automation.",
+      "t43": "Approach",
+      "t44": "HOW I WORK",
+      "t45": "01 · Architecture",
+      "t46": "Clean layers",
+      "t47": "Clean Architecture, hexagonal and DDD with judgment: pure domain, use cases and swappable infrastructure. No over-engineering.",
+      "t48": "02 · APIs &amp; Data",
+      "t49": "Predictable and fast",
+      "t50": "Consistent REST and GraphQL, strict validation, pooled Postgres, durable queues and idempotency.",
+      "t51": "03 · Security",
+      "t52": "By default",
+      "t53": "HMAC-signed webhooks, JWT sessions, server-side access and per-user isolation (fail-closed).",
+      "t54": "04 · AI &amp; LLMs",
+      "t55": "Applied",
+      "t56": "RAG, LangChain and OpenAI; spec-driven development with Claude Code and role-specialized agents.",
+      "t57": "TOOLS",
+      "t58": "<span class=\"mono\">EDUCATION<\/span> &nbsp;B.Eng. in Computer Engineering — Universidad Autónoma de Guerrero (2021)",
+      "t59": "<span class=\"mono\">CERT<\/span> &nbsp;AWS Solutions Architect – Associate · official course (2024)",
+      "t60": "<span class=\"mono\">LANGUAGES<\/span> &nbsp;Spanish (native) · English (basic–intermediate)",
+      "t61": "Let’s build<br>something solid.",
+      "t62": "Got a system that really has to work? Let’s talk.",
+      "t63": "Email",
+      "t64": "© 2026 · Gabriel Antaño Locia · Portfolio",
+      "t65": "Remote · Mexico"
+};
+    var desc = document.querySelector('meta[name="description"]');
+    var META = {
+      es: { title: document.title, desc: desc.content },
+      en: { title: "Gabriel Antaño Locia — Full-Stack Engineer",
+            desc: "Portfolio of Gabriel Antaño Locia, backend-leaning Full-Stack Engineer: Node.js, TypeScript and Python; Clean Architecture, hexagonal and DDD; PostgreSQL, AWS and LLMs." }
+    };
+    var nodes = document.querySelectorAll("[data-i18n]");
+    var ES = [];
+    nodes.forEach(function (el, i) { ES[i] = el.innerHTML; });
+    var nav = document.querySelector("[data-i18n-aria]");
+    var navEs = nav.getAttribute("aria-label");
+    var buttons = document.querySelectorAll(".lang button");
+
+    function apply(lang) {
+      nodes.forEach(function (el, i) {
+        var html = lang === "en" ? EN[el.getAttribute("data-i18n")] : ES[i];
+        if (html != null && el.innerHTML !== html) el.innerHTML = html;
+      });
+      nav.setAttribute("aria-label", lang === "en" ? nav.getAttribute("data-i18n-aria") : navEs);
+      document.documentElement.lang = lang;
+      document.title = META[lang].title;
+      desc.content = META[lang].desc;
+      buttons.forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-lang") === lang)); });
+    }
+    buttons.forEach(function (b) {
+      b.addEventListener("click", function () {
+        var lang = b.getAttribute("data-lang");
+        try { localStorage.setItem("lang", lang); } catch (e) {}
+        apply(lang);
+      });
+    });
+    apply(document.documentElement.lang === "en" ? "en" : "es");
+  })();
+</script>
 <script>
   (function () {
     var groups = [document.querySelectorAll("#trabajo .rec"), document.querySelectorAll("#trayectoria .job")];
