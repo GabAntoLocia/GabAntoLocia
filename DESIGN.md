@@ -61,3 +61,7 @@ ES/EN con selector. Idioma inicial: elección guardada → `?lang=` → idioma d
 - **Verificabilidad:** cada proyecto lleva una etiqueta `.badge`: **Código público** (con enlace) o **Código privado** (proyectos de empresa, p. ej. Clean & Shiny; sin enlace). Una leyenda bajo el título de "Trabajo seleccionado" explica la diferencia. Si un proyecto nuevo es público, enlazarlo; si es privado, no inventar evidencia.
 - **Enfoque:** 6 tarjetas (Arquitectura, APIs & Datos, Interfaces, Seguridad, IA & LLMs, Calidad), en rejilla de 3 columnas (2 en tablet, 1 en móvil). Acentos de color en orden quetzal → cotinga → oro → espátula → quetzal → cotinga.
 - **Pendiente:** capturas de pantalla de los casos de estudio (solo si no exponen datos de clientes) y el enlace de LinkedIn.
+
+## Navegación
+- "Ver proyectos" y el menú "Trabajo" aterrizan con `#trabajo{scroll-margin-top:max(250px,38vh)}`: el penacho (que vive sobre la sección) queda visible, abierto, y la serpiente se ve nacer de él. No reducir este margen.
+- Scroll suave (`scroll-behavior:smooth`) solo si el visitante no pidió movimiento reducido: así se ve subir y abrirse el penacho durante el desplazamiento.

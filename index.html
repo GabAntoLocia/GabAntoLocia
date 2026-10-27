@@ -72,6 +72,9 @@
   .wrap{max-width:var(--maxw);margin-inline:auto;padding-left:var(--gutter);padding-right:var(--gutter-r)}
   .band{position:relative;z-index:2}
   section[id]{scroll-margin-top:84px}
+  /* "Ver proyectos" / menú "Trabajo": se aterriza dejando a la vista el penacho (arriba de la sección) y no solo el título */
+  #trabajo{scroll-margin-top:max(250px,38vh)}
+  @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
   .skip{position:absolute;left:-9999px;top:0;z-index:40;background:var(--red);color:#fff;font-family:var(--mono);font-size:12px;padding:10px 14px;text-decoration:none}
   .skip:focus{left:8px;top:8px}
   .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--chrome)}
